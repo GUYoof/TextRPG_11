@@ -9,8 +9,6 @@ namespace TXT11
 {
     public class Hotel
     {
-        
-
         public void Rest(Player player)
         {
             Console.WriteLine("휴식하기");
@@ -28,10 +26,38 @@ namespace TXT11
                     Console.WriteLine("휴식을 취합니다.");
                     Console.WriteLine("-500골드");
 
-                    player.HP= 100;
+                    player.HP = 100;
                     player.Gold -= 500;
 
                 }
+            }
+            else if (Choose == 0)
+            {
+                return;
+            }
+            else
+            {
+                Console.WriteLine("잘못된 입력입니다");
+                Rest(player);
+            }
+        }
+    }
+
+    public class CampFire
+    {
+        public void Rest(Player player)
+        {
+            Console.WriteLine("휴식하기");
+            Console.WriteLine(); //공백 추가
+            Console.WriteLine("1. 휴식하기\n 0.나가기");
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 선택해주세요.\n>>");
+            int Choose = int.Parse(Console.ReadLine());
+            if (Choose == 1)
+            {
+                Console.WriteLine("휴식을 취합니다.");
+                player.HP += 30;
+
             }
             else if (Choose == 0)
             {
