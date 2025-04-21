@@ -4,7 +4,7 @@
 
     public class Program
     {
-        static void Main(string[] args)
+        public void Main(string[] args)
         {
             Console.WriteLine("안녕하세요. 스파르타 던전에 오신것을 환영합니다.");
             Console.Write("\n당신의 이름은 무엇입니까?: ");

@@ -26,7 +26,7 @@ namespace TXT11
                 };
         }
 
-        private void ShowItemList(Player player)
+        public void ShowItemList(Player player)
         {
             Console.Clear();
             Console.WriteLine("상점");
@@ -84,7 +84,7 @@ namespace TXT11
             }
         }
 
-        private void ProceedPurchase(Player player)
+        public void ProceedPurchase(Player player)
         {
             Console.Clear();
             Console.WriteLine("구매할 아이템 번호를 선택하세요.\n");
@@ -131,7 +131,7 @@ namespace TXT11
             }
         }
 
-        private void HandlePurchase(Player player, int index)
+        public void HandlePurchase(Player player, int index)
         {
             var selectedItem = Items[index - 1];
             if (player.Inventory.Any(i => i.Name == selectedItem.Name))
