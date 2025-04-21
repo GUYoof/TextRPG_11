@@ -1,10 +1,10 @@
-﻿namespace SpartaDungeon
+﻿namespace TXT11
 {
     public enum ItemType { Armor, Weapon }
 
     public class Program
     {
-        public void Main(string[] args)
+        public static void Main(string[] args)
         {
             Console.WriteLine("안녕하세요. 스파르타 던전에 오신것을 환영합니다.");
             Console.Write("\n당신의 이름은 무엇입니까?: ");
@@ -64,7 +64,7 @@
 
             Player player = new Player(characterName, jobName, lv, hp, attack, defense, gold);
             Shop shop = new Shop();
-            Dungeon dungeon = new Dungeon();
+            DungeonProgram dungeonProgram = new DungeonProgram();
 
             while (true)
             {
@@ -92,7 +92,7 @@
                             shop.ShopEnter(player);
                             break;
                         case 4:
-                            dungeon.DungeonEnter(player);
+                            dungeonProgram.DungeonMain(player);
                             break;
                         case 0:
                             Console.WriteLine("게임을 종료합니다.");
