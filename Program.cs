@@ -75,6 +75,7 @@
                 Console.WriteLine("2. 인벤토리");
                 Console.WriteLine("3. 상점");
                 Console.WriteLine("4. 던전 입장");
+                Console.WriteLine("5. 휴식");
                 Console.WriteLine("0. 게임 종료");
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write("\n>> ");
