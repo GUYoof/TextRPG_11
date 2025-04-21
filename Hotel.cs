@@ -13,6 +13,7 @@ namespace TXT11
 
         public void Rest(Player player)
         {
+            Console.Clear();
             Console.WriteLine("여관 이용 하기");
 
             Console.WriteLine("500G를 내면 여관에서 체력을 회복 할수 있습니다.");
@@ -51,6 +52,7 @@ namespace TXT11
 
         public void Rest(Player player)
         {
+            Console.Clear();
             Console.WriteLine("모닥불에서 휴식하기");
 
             Console.WriteLine("1. 휴식하기\n 0.나가기");
