@@ -152,9 +152,6 @@ namespace TXT11
 
                 if (choice == "1") //여관으로 돌아가기
                 {
-                    //Console.WriteLine("여관으로 돌아갑니다.");
-                    //Hotel hotel = new Hotel();
-                    //hotel.Rest(player);
                     return;
                 }
                 else if (choice == "2")
