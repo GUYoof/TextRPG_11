@@ -67,8 +67,16 @@ namespace TXT11
             onmonsterattack += () =>
             {
                 Console.WriteLine($"\n[{monster.Name}의 반격!]");
-                player.HP -= (monster.Attack -= player.Defense);
-                Console.WriteLine($"플레이어가 {monster.Attack -= player.Defense} 데미지를 입었습니다. 현재 hp: {player.HP}");
+                if (monster.Attack < player.Defense)
+                {
+                    player.HP = player.HP;
+                    Console.WriteLine($"플레이어가 0 데미지를 입었습니다. 현재 hp: {player.HP}");
+                }
+                else
+                {
+                    monster.Attack = monster.Attack -= player.Defense;
+                    Console.WriteLine($"플레이어가 {monster.Attack -= player.Defense} 데미지를 입었습니다. 현재 hp: {player.HP}");
+                }
             };
         }
         public void DungeonEnter()
@@ -143,9 +151,10 @@ namespace TXT11
 
                 if (choice == "1") //여관으로 돌아가기
                 {
-                    Console.WriteLine("여관으로 돌아갑니다.");
-                    Hotel hotel = new Hotel();
-                    hotel.Rest(player);
+                    //Console.WriteLine("여관으로 돌아갑니다.");
+                    //Hotel hotel = new Hotel();
+                    //hotel.Rest(player);
+                    return;
                 }
                 else if (choice == "2")
                 {
@@ -155,6 +164,7 @@ namespace TXT11
                 {
                     Console.WriteLine("모닥불을 피우고 휴식을 취합니다.");
                     player.HP += 30;
+                    Console.WriteLine($"{player.HP}");
                     Console.WriteLine("다음날 아침이 되자 몬스터가 습격해왔습니다.");
                     battle.DungeonEnter();
                 }
