@@ -8,7 +8,7 @@ using TXT11;
 
 namespace TXT11
 {
-    public class Hotel
+    public class Inn
     {
 
 
@@ -47,7 +47,7 @@ namespace TXT11
         }
     }
 
-    public class Campfire
+    public class CampRest
     {
 
 
