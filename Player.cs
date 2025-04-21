@@ -127,5 +127,86 @@ namespace TXT11
                 }
             }
         }
+
+        public void ProcessedEquipment()
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("인벤토리 - 장착 관리");
+                Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+                Console.WriteLine("\n[아이템 목록]");
+
+                if (Inventory.Count == 0)
+                {
+                    Console.WriteLine("보유 중인 아이템이 없습니다.");
+                }
+                else
+                {
+                    for (int i = 0; i < Inventory.Count; i++)
+                    {
+                        var item = Inventory[i];
+                        string equippedMark = item.IsEquipped ? "[E] " : "";
+
+                        string statText = "";
+                        if (item.Type == ItemType.Weapon && item.Attack > 0)
+                            statText = $"공격력 +{item.Attack}";
+                        else if (item.Type == ItemType.Armor && item.Defense > 0)
+                            statText = $"방어력 +{item.Defense}";
+
+                        Console.WriteLine($"{i + 1}. {equippedMark}{item.Name} {statText} {item.Description} ({item.Type})");
+                    }
+                }
+                Console.WriteLine("\n장착하거나 해제할 아이템을 선택해 주세요.");
+                Console.WriteLine("\n0. 취소하고 돌아가기");
+                Console.Write("\n선택: ");
+                string select = Console.ReadLine();
+
+                if (int.TryParse(select, out int index))
+                {
+                    if (index == 0)
+                        return;
+                    else if (index >= 1 && index <= Inventory.Count)
+                    {
+                        EquippedItem(index);
+                    }
+                    else
+                    {
+                        Console.WriteLine("올바른 번호를 입력해주세요.");
+                        Console.ReadLine();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("숫자를 입력해주세요.");
+                    Console.ReadLine();
+                }
+            }
+        }
+
+        public void EquippedItem(int index)
+        {
+            var selectedItem = Inventory[index - 1];
+
+            if (!selectedItem.IsEquipped)
+            {
+                foreach (var item in Inventory)
+                    if (item.Type == selectedItem.Type && item.IsEquipped)
+                    {
+                        item.IsEquipped = false;
+                        Console.WriteLine($"{item.Name}이 장착 해제되었습니다.");
+                    }
+                selectedItem.IsEquipped = true;
+                Console.WriteLine($"\n{selectedItem.Name}을(를) 장착했습니다.");
+            }
+            else
+            {
+                selectedItem.IsEquipped = false;
+                Console.WriteLine($"\n{selectedItem.Name}을(를) 해제했습니다.");
+            }
+
+            Console.WriteLine("\n엔터를 누르면 돌아갑니다.");
+            Console.ReadLine();
+        }
     }
 }
