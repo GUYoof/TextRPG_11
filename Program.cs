@@ -65,6 +65,7 @@
             Player player = new Player(characterName, jobName, lv, hp, attack, defense, gold);
             Shop shop = new Shop();
             DungeonProgram dungeonProgram = new DungeonProgram();
+            Hotel rest = new Hotel();
 
             while (true)
             {
@@ -93,6 +94,9 @@
                             break;
                         case 4:
                             dungeonProgram.DungeonMain(player);
+                            break;
+                        case 5:
+                            rest.Rest(player);
                             break;
                         case 0:
                             Console.WriteLine("게임을 종료합니다.");
