@@ -1,18 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks.Dataflow;
-using System.Xml.Linq;
-using TXT11;
-
-namespace TXT11
+﻿namespace SpartaDungeon
 {
     public enum ItemType { Armor, Weapon }
 
     public class Program
     {
-        public static void Main(string[] args)
+        public void Main(string[] args)
         {
             Console.WriteLine("안녕하세요. 스파르타 던전에 오신것을 환영합니다.");
             Console.Write("\n당신의 이름은 무엇입니까?: ");
