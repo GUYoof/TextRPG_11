@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TXT11;
 
-namespace TXT11
+ namespace TXT11
 {
     public class Player
     {

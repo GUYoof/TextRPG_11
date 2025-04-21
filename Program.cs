@@ -1,12 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks.Dataflow;
-using System.Xml.Linq;
-using TXT11;
-
-namespace TXT11
+﻿namespace TXT11
 {
     public enum ItemType { Armor, Weapon }
 
@@ -72,7 +64,7 @@ namespace TXT11
 
             Player player = new Player(characterName, jobName, lv, hp, attack, defense, gold);
             Shop shop = new Shop();
-            Dungeon dungeon = new Dungeon();
+            DungeonProgram dungeonProgram = new DungeonProgram();
 
             while (true)
             {
@@ -100,7 +92,7 @@ namespace TXT11
                             shop.ShopEnter(player);
                             break;
                         case 4:
-                            dungeon.DungeonEnter(player);
+                            dungeonProgram.DungeonMain(player);
                             break;
                         case 0:
                             Console.WriteLine("게임을 종료합니다.");
