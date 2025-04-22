@@ -115,7 +115,8 @@ namespace TXT11
                     {
                         if (output == 0)
                         {
-                            return;
+                            Town town = new Town(player);
+                            town.TownMain();
                         }
                         else if (output == 1)
                         {
@@ -177,13 +178,13 @@ namespace TXT11
                 else
                 {
                     Console.WriteLine("올바른 번호를 입력해주세요.");
-                    Console.ReadLine();
+
                 }
             }
             else
             {
                 Console.WriteLine("숫자를 입력해주세요.");
-                Console.ReadLine();
+
             }
         }
 
