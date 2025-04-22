@@ -78,8 +78,13 @@ namespace TXT11
             onmonsterattack += () =>
             {
                 Console.WriteLine($"\n[{monster.Name}의 반격!]");
-
-                float damage = monster.Attack - player.Defense;
+                if (player.AvoidChance() == false)
+                {
+                    Console.WriteLine();
+                    return;
+                }
+                
+                    float damage = monster.Attack - player.Defense;
                 if (damage <= 0)
                 {
                     damage = 0;
