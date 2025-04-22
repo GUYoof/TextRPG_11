@@ -178,13 +178,11 @@ namespace TXT11
                 else
                 {
                     Console.WriteLine("올바른 번호를 입력해주세요.");
-
                 }
             }
             else
             {
                 Console.WriteLine("숫자를 입력해주세요.");
-
             }
         }
 
@@ -198,10 +196,38 @@ namespace TXT11
                 player.Gold -= selectedItem.Price;
                 selectedItem.IsSold = true;
                 player.Inventory.Add(selectedItem);
+
+
                 Console.WriteLine($"'{selectedItem.Name}'을(를) 구매했습니다!");
+                Console.WriteLine($"바로 인벤토리로 이동하시겠습니까?");
+                Console.WriteLine($"\n1. [인벤토리로 이동]");
+                Console.WriteLine($"0. [상점으로 돌아가기 ]");
+
+
+                string select = Console.ReadLine();
+                if (int.TryParse(select, out int output))
+                {
+                    switch (output)
+                    {
+                        case 1:
+                            player.ShowInventory();
+                            break;
+                        case 0:
+                            ShopEnter(player);
+                            return;
+                        default:
+                            Console.WriteLine("올바른 숫자를 입력해주세요.");
+                            Console.ReadLine();
+                            break;
+                    }
+                    Console.WriteLine("숫자를 입력해주세요.");
+                    Console.ReadLine();
+                }
+
+
+                else Console.WriteLine("Gold가 부족합니다.");
+                Console.ReadLine();
             }
-            else Console.WriteLine("Gold가 부족합니다.");
-            Console.ReadLine();
         }
     }
 }
