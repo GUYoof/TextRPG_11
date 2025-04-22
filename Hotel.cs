@@ -31,9 +31,9 @@ namespace TXT11
                     Console.WriteLine("휴식을 취합니다.");
                     Console.WriteLine("-500골드");
 
-                    player.HP = 100;
+                    player.HP = player.MaxHP;
                     player.Gold -= 500;
-
+                    
                 }
             }
             else if (Choose == 0)
@@ -64,9 +64,14 @@ namespace TXT11
             {
                 Console.WriteLine("휴식을 취합니다. 체력 +30 회복");
                 player.HP += 30;
+                if (player.HP > player.MaxHP)
+                {
+                    player.HP = player.MaxHP;
+                }
                 Console.WriteLine($"현재 HP: {player.HP}");
 
-                Console.WriteLine("던전으로 다시 돌아갑니다...");
+                Console.WriteLine("엔터를 누르면 던전으로 다시 돌아갑니다...");
+                Console.ReadLine();
                 dungeonProgram.DungeonMain(player);
             }
             else if (Choose == 0)

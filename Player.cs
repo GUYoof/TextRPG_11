@@ -32,9 +32,9 @@ using TXT11;
             }
             else
             {
-                //int heal = 30;
-                //HP += heal;
-                //if (HP > MaxHP) HP = MaxHP;
+                int heal = 30;
+                HP += heal;
+                if (HP > MaxHP) HP = MaxHP;
                 PotionCount--;
                 Console.WriteLine($"포션 사용!");
             }
@@ -58,18 +58,19 @@ using TXT11;
                 Attack += 0.5f;
                 Defense +=  1;
                 Console.WriteLine($"레벨업! Lv.{Level - 1} → Lv.{Level}");
+                Console.WriteLine($"공격력 {prevAtk} → {Attack}");
+                Console.WriteLine($"방어력 {prevDef} → {Defense}");
             }
 
             Console.WriteLine($"Exp {prevExp} → {Exp}");
-            Console.WriteLine($"공격력 {prevAtk} → {Attack}");
-            Console.WriteLine($"방어력 {prevDef} → {Defense}");
+
 
         }
 
         public List<Item> Inventory { get; private set; } = new List<Item>();
 
         // 레벨업 보상 attack 0.5f , float으로 바꿔야함.
-        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , int potioncount, float critical)
+        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , int potioncount)
         {
             Name = name;
             Job = job;
@@ -80,17 +81,19 @@ using TXT11;
             Gold = gold;
             Exp = exp;
             PotionCount = potioncount;
-            Critical = critical;
             switch (job.ToLower())
             {
                 case "전사":
                     MaxHP = 100;
+                    Critical = 0.2f;
                     break;
                 case "도적":
                     MaxHP = 90;
+                    Critical = 0.4f;
                     break;
                 case "궁수":
                     MaxHP = 80;
+                    Critical = 0.3f;
                     break;
                 default:
                     MaxHP = 100; // 기본값
