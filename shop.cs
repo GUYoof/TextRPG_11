@@ -151,7 +151,7 @@ namespace TXT11
                         Console.WriteLine("숫자를 입력해주세요.");
 
                     }
-                    return;
+                    Console.WriteLine("올바른 번호를 입력해주세요.");
                 } while (true);
 
             }
@@ -159,7 +159,6 @@ namespace TXT11
 
         public void ProceedPurchase(Player player)
         {
-            Console.Clear();
             Console.Clear();
             Console.WriteLine("상점");
             Console.WriteLine("[보유 골드]");
@@ -182,9 +181,8 @@ namespace TXT11
                 Console.WriteLine($" [{i + 1}].  {item.Name} : {statText} {item.Description} ({priceText})");
             }
 
-            Console.WriteLine("\n구매할 아이템 번호를 선택하세요.\n");
-            Console.WriteLine("\n엔터를 누르면 돌아갑니다.");
-            Console.Write("\n선택: ");
+            Console.WriteLine("\n구매할 아이템 번호를 선택하세요.([0]. 나가기)");
+            Console.Write("선택 :  ");
             string select = Console.ReadLine();
 
             if (int.TryParse(select, out int index))
@@ -215,8 +213,7 @@ namespace TXT11
             if (player.Inventory.Any(i => i.Name == selectedItem.Name))
             {
                 Console.WriteLine("이미 구매한 아이템입니다.");
-                Console.WriteLine("\n엔터를 누르면 돌아갑니다.");
-                Console.ReadLine();
+                Console.ReadKey();
                 ProceedPurchase(player);
             }
 
@@ -229,30 +226,10 @@ namespace TXT11
 
 
                 Console.WriteLine($"'{selectedItem.Name}'을(를) 구매했습니다!");
-                Console.WriteLine($"바로 인벤토리로 이동하시겠습니까?");
-                Console.WriteLine($"\n[1]. [인벤토리로 이동]");
-                Console.WriteLine($"[2]. [추가로 구매하기]");
-
-                string select = Console.ReadLine();
-                if (int.TryParse(select, out int output))
-                {
-                    switch (output)
-                    {
-                        case 1:
-                            player.ShowInventory();
-                            break;
-                        case 2:
-                            ProceedPurchase(player);
-                            break;
-                        default:
-                            Console.WriteLine("올바른 숫자를 입력해주세요.");
-                            Console.ReadLine();
-                            break;
-                    }
-                    Console.WriteLine("숫자를 입력해주세요.");
-                }
+                Console.ReadKey();
+                ProceedPurchase(player);
             }
-            if ( player.Gold < selectedItem.Price)
+            else
             {
                 Console.WriteLine("\n");
                 Console.WriteLine("Gold가 부족합니다.");
