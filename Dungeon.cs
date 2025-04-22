@@ -45,7 +45,7 @@ namespace TXT11
         }
     }
     // 전투 시스템
-    public class battlesystem
+    public class Battlesystem
     {
         public event BattleAction onplayerattack;
         public event BattleAction onusepotion;
@@ -54,7 +54,7 @@ namespace TXT11
         private Player player;
         private Monster monster;
 
-        public battlesystem(Player player, Monster monster)
+        public Battlesystem(Player player, Monster monster)
         {
             this.player = player;
             this.monster = monster;
@@ -63,23 +63,31 @@ namespace TXT11
             onplayerattack += () =>
             {
                 Console.WriteLine("\n[플레이어의 공격]");
-                monster.HP -= player.Attack;
-                Console.WriteLine($"{monster.Name}에게 {player.Attack} 데미지를 입혔습니다. 남은 hp: {monster.HP}");
+                float damage = player.Attack;
+                if (player.CriticalChance())
+                {
+                    damage *= 2;
+                    Console.WriteLine("⚡ 크리티컬 히트! ⚡");
+                }
+                monster.HP -= damage;
+                Console.WriteLine($"{monster.Name}에게 {damage} 데미지를 입혔습니다. 남은 hp: {monster.HP}");
             };
 
 
             onmonsterattack += () =>
             {
                 Console.WriteLine($"\n[{monster.Name}의 반격!]");
-                if (monster.Attack < player.Defense)
+
+                float damage = monster.Attack - player.Defense;
+                if (damage <= 0)
                 {
-                    player.HP = player.HP;
-                    Console.WriteLine($"플레이어가 0 데미지를 입었습니다. 현재 hp: {player.HP}");
+                    damage = 0;
+                    Console.WriteLine($"플레이어가 0 데미지를 입었습니다. 현재 HP: {player.HP}");
                 }
                 else
                 {
-                    monster.Attack = monster.Attack -= player.Defense;
-                    Console.WriteLine($"플레이어가 {monster.Attack -= player.Defense} 데미지를 입었습니다. 현재 hp: {player.HP}");
+                    player.HP -= damage;
+                    Console.WriteLine($"플레이어가 {damage} 데미지를 입었습니다. 현재 HP: {player.HP}");
                 }
             };
         }
@@ -146,9 +154,10 @@ namespace TXT11
                 }
 
                 var selectedDungeon = dungeons[dungeonChoice - 1];
-                battlesystem battle = new battlesystem(player, selectedDungeon.Monster);
+                Battlesystem battle = new Battlesystem(player, selectedDungeon.Monster);
                 battle.DungeonEnter();
                 Campfire campfire = new Campfire();
+                DungeonProgram dp = new DungeonProgram();
                 if (player.HP <= 0) break;
 
                 Console.WriteLine("\n전투 후 행동 선택:");
@@ -164,11 +173,11 @@ namespace TXT11
                 }
                 else if (choice == "2")
                 {
-                    battle.DungeonEnter();
+                    DungeonMain(player);
                 }
                 else if (choice == "3")
                 {
-                    campfire.Rest(player);
+                    campfire.Rest(player, dp);
                 }
 
             }
