@@ -63,30 +63,35 @@ namespace TXT11
 
                 Console.WriteLine($"\n 포션 가격: 30G  {player.PotionCount} / {maxPotionCount}(최대포션갯수)" );
                 Console.Write("몇 개 구매하시겠습니까?");
-                Console.WriteLine("[0]. 나가기");
-
-                if (int.TryParse(Console.ReadLine(), out int amount) && amount >= 0 && amount <= (maxPotionCount - player.PotionCount) )
+                Console.WriteLine("[0]. 상점으로 돌아가기");
+                do
                 {
-                    int cost = amount * 30;
 
-                    if (amount == 0)
+                    if (int.TryParse(Console.ReadLine(), out int amount) && amount >= 0 && amount <= (maxPotionCount - player.PotionCount))
                     {
-                        return;
-                    }
+                        int cost = amount * 30;
 
-                    else
-                    {
 
-                        if (player.Gold >= cost)
+                        if (amount == 0)
                         {
-                            player.Gold -= cost;
-                            player.PotionCount += amount;
-                            Console.WriteLine($"포션 {amount}개 구매 완료. 남은 골드: {player.Gold}");
+                            ShopEnter(player);
                         }
-                        else Console.WriteLine("골드가 부족합니다.");
+
+                        else
+                        {
+
+                            if (player.Gold >= cost)
+                            {
+                                player.Gold -= cost;
+                                player.PotionCount += amount;
+                                Console.WriteLine($"포션 {amount}개 구매 완료. 남은 골드: {player.Gold}");
+                            }
+                            else Console.WriteLine("골드가 부족합니다.");
+                        }
                     }
-                }
-                else Console.WriteLine("소지 가능한 포션 수를 초과했습니다.");
+
+                    else Console.WriteLine("소지 가능한 포션 수를 초과했습니다.");
+                } while (true);
             }
         }
             
@@ -101,26 +106,31 @@ namespace TXT11
                 Console.WriteLine("0. 나가기");
                 Console.WriteLine("\n원하는 행동을 입력하세요.");
                 Console.Write("\n선택: ");
-                string select = Console.ReadLine();
 
+                string select = Console.ReadLine();
                 do
                 {
-                    if (int.TryParse(Console.ReadLine(), out int purchase) && purchase >= 0)
+                    if (int.TryParse(select, out int output) && output >= 0)
                     {
-                        switch (purchase)
+                        if (output == 0)
                         {
-                            case 1:
-                                ProceedPurchase(player);
-                                break;
-                            case 2:
-                                PotionShopEnter(player);
-                                break;
-                            case 0:
-                                return;
+                            return;
                         }
-                    }
-                    Console.WriteLine("올바른 번호를 입력해주세요.");
+                        else if (output == 1)
+                        {
+                            ProceedPurchase(player);
+                        }
+                        else if (output == 2)
+                        {
+                            PotionShopEnter(player);
+                        }
+                        else
+                        {
+                            Console.WriteLine("올바른 번호를 입력해주세요.");
+                        }
+                        Console.WriteLine("숫자를 입력해주세요.");
 
+                    }
                 } while (true);
 
             }
@@ -150,12 +160,15 @@ namespace TXT11
             Console.WriteLine("\n어떤 아이템을 구매하겠습니까? 번호를 입력하세요.");
             Console.WriteLine("\n0. 취소하고 돌아가기");
             Console.Write("\n선택: ");
+
             string select = Console.ReadLine();
 
             if (int.TryParse(select, out int index))
             {
                 if (index == 0)
-                    return;
+                {
+                    ShopEnter(player);
+                }
                 else if (index >= 1 && index <= Items.Count)
                 {
                     HandlePurchase(player, index);
