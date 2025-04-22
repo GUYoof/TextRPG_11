@@ -69,7 +69,7 @@ using TXT11;
         public List<Item> Inventory { get; private set; } = new List<Item>();
 
         // 레벨업 보상 attack 0.5f , float으로 바꿔야함.
-        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , int potioncount, float critical)
+        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , int potioncount)
         {
             Name = name;
             Job = job;
@@ -80,17 +80,19 @@ using TXT11;
             Gold = gold;
             Exp = exp;
             PotionCount = potioncount;
-            Critical = critical;
             switch (job.ToLower())
             {
                 case "전사":
                     MaxHP = 100;
+                    Critical = 0.2f;
                     break;
                 case "도적":
                     MaxHP = 90;
+                    Critical = 0.4f;
                     break;
                 case "궁수":
                     MaxHP = 80;
+                    Critical = 0.3f;
                     break;
                 default:
                     MaxHP = 100; // 기본값

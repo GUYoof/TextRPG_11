@@ -1,9 +1,13 @@
-﻿namespace TXT11
+﻿using System.Net.NetworkInformation;
+
+namespace TXT11
 {
     public enum ItemType { Armor, Weapon }
 
     public class Program
     {
+
+
         public static void Main(string[] args)
         {
             Console.WriteLine("안녕하세요. 스파르타 던전에 오신것을 환영합니다.");
@@ -11,8 +15,8 @@
             string characterName = Console.ReadLine();
 
             string jobName = "";
-            int lv = 1, hp = 0, attack = 0, defense = 0, gold = 0, exp = 0 , potioncount = 0 ;
-            float  critical = 0;
+            int lv = 1, hp = 0, attack = 0, defense = 0, gold = 0, exp = 0, potioncount = 0;
+            float critical = 0;
             bool validJob = false;
 
             while (!validJob)
@@ -62,12 +66,28 @@
                     Console.ReadLine();
                 }
             }
+            Player player = new Player(characterName, jobName, lv, hp, attack, defense, gold, exp, potioncount);
+            Town town = new Town(player);
+            town.TownMain();
+        }
+    }
 
-            Player player = new Player(characterName, jobName, lv, hp, attack, defense, gold, exp, potioncount, critical);
-            Shop shop = new Shop();
-            DungeonProgram dungeonProgram = new DungeonProgram();
-            Hotel rest = new Hotel();
+    public class Town
+    {
+        private Player player;
 
+        Shop shop = new Shop();
+        DungeonProgram dungeonProgram = new DungeonProgram();
+        Hotel rest = new Hotel();
+
+        public Town(Player player)
+        {
+            this.player = player;
+
+        }
+
+        public void TownMain()
+        {
             while (true)
             {
                 Console.Clear();
@@ -118,6 +138,9 @@
         }
     }
 }
+
+
+
 
 //public class Game
 //{

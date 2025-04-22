@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TXT11;
+using static TXT11.Program;
 
 namespace TXT11
 {
@@ -97,10 +98,15 @@ namespace TXT11
             while (player.HP > 0 && monster.HP > 0)
             {
                 Console.WriteLine("\n1. 공격");
+                Console.WriteLine("2. 포션 사용");
                 Console.Write("행동 선택: ");
                 string input = Console.ReadLine();
 
                 if (input == "1") onplayerattack?.Invoke();
+                else if (input == "2")
+                {
+
+                }
                 else
                 {
                     Console.WriteLine("잘못된 입력");
@@ -170,6 +176,8 @@ namespace TXT11
 
                 if (choice == "1") //여관으로 돌아가기
                 {
+                    Town town = new Town(player);
+                    town.TownMain();
                     return;
                 }
                 else if (choice == "2")
@@ -178,14 +186,12 @@ namespace TXT11
                 }
                 else if (choice == "3")
                 {
-                    campfire.Rest(player, dp);
+                    campfire.Rest(player, this);
                 }
 
             }
         }
     }
-    
-    
 }
 
 
