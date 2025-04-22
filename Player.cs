@@ -138,10 +138,13 @@ using TXT11;
             float bonusAttack = 0;
             int bonusDefense = 0;
 
-            foreach (var item in Inventory)
+            foreach (Item item in Inventory)
             {
-                bonusAttack += item.Attack;
-                bonusDefense += item.Defense;
+                if (item.IsEquipped == true)
+                {
+                    bonusAttack += item.Attack;
+                    bonusDefense += item.Defense;
+                }
             }
 
             Console.Clear();
@@ -278,11 +281,11 @@ using TXT11;
 
         public void EquippedItem(int index)
         {
-            var selectedItem = Inventory[index - 1];
+            Item selectedItem = Inventory[index - 1];
 
             if (!selectedItem.IsEquipped)
             {
-                foreach (var item in Inventory)
+                foreach (Item item in Inventory)
                     if (item.Type == selectedItem.Type && item.IsEquipped)
                     {
                         item.IsEquipped = false;
