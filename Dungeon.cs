@@ -102,10 +102,13 @@ namespace TXT11
                 Console.Write("행동 선택: ");
                 string input = Console.ReadLine();
 
-                if (input == "1") onplayerattack?.Invoke();
+                if (input == "1")
+                {
+                    onplayerattack?.Invoke();
+                }
                 else if (input == "2")
                 {
-
+                    player.UsePotion();
                 }
                 else
                 {
@@ -116,12 +119,8 @@ namespace TXT11
                 if (monster.HP <= 0)
                 {
                     player.Gold += monster.GoldReward;
-                    player.Exp += monster.ExpReward;
-
                     Console.WriteLine($"{monster.Name}을(를) 쓰러뜨렸습니다! \n골드 +{monster.GoldReward}");
-                    // Console.WriteLine($"Exp {prevExp} → {Exp}");
-                    // Console.WriteLine($"공격력 {prevAtk} → {Attack}");
-                    // Console.WriteLine($"방어력 {prevDef} → {Defense}");
+                    player.GainExp(monster.ExpReward);
                     break;
                 }
 
