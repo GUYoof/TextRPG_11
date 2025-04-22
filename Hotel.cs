@@ -28,8 +28,10 @@ namespace TXT11
             {
                 if (player.Gold >= 500)
                 {
+                    Console.Clear() ;
                     Console.WriteLine("휴식을 취합니다.");
                     Console.WriteLine("-500골드");
+                    Console.ReadKey();
 
                     player.HP = player.MaxHP;
                     player.Gold -= 500;
@@ -38,6 +40,9 @@ namespace TXT11
             }
             else if (Choose == 0)
             {
+                Console.WriteLine($"골드가 부족합니다.현재 골드 : {player.Gold}");
+                Console.ReadKey();
+                Console.Clear();
                 return;
             }
             else

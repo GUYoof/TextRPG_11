@@ -24,7 +24,7 @@ namespace TXT11
         public float Critical { get; set; }
         public float Avoid { get; set; }
         
-
+        private static Random rand = new Random();
         private static readonly int[] LevelRequirements = { 10, 35, 65, 100 }; // 레벨업에 필요한 경험치
 
         public void UsePotion()
@@ -112,16 +112,14 @@ namespace TXT11
         }
         public bool CriticalChance()
         {
-            Random rand = new Random();
-            float roll1 = (float)rand.NextDouble(); // 0.0 ~ 1.0 사이의 난수
-            return roll1 < Critical; // 예: Critical = 0.2f -> 20% 확률
+            float roll = (float)rand.NextDouble();
+            return roll < Critical;
         }
 
         public bool AvoidChance()
         {
-            Random rand = new Random();
-            float roll2 = (float)rand.NextDouble(); // 0.0 ~ 1.0 사이의 난수
-            return roll2 < Avoid; // 예: Critical = 0.2f -> 20% 확률
+            float roll = (float)rand.NextDouble();
+            return roll < Avoid;
         }
 
         public float GetTotalAttack()

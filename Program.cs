@@ -102,7 +102,7 @@ namespace TXT11
                 }
 
                 Console.Clear();
-                Console.WriteLine($"\n\"{select}... 나쁘지 않은 선택이야.\"");
+                Console.WriteLine($"\n\"{jobName}... 나쁘지 않은 선택이야.\"");
                 Console.WriteLine($"\"모험을 떠날 준비가 되었는가?\"");
                 Console.ReadKey();
                 Console.WriteLine("\n\"그럼 행운을 빌겠네...\"");
