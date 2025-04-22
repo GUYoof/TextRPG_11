@@ -11,7 +11,7 @@
             string characterName = Console.ReadLine();
 
             string jobName = "";
-            int lv = 1, hp = 0, attack = 0, defense = 0, gold = 0, exp = 0 ;
+            int lv = 1, hp = 0, attack = 0, defense = 0, gold = 0, exp = 0 , potioncount = 0 ;
             float  critical = 0;
             bool validJob = false;
 
@@ -63,7 +63,7 @@
                 }
             }
 
-            Player player = new Player(characterName, jobName, lv, hp, attack, defense, gold, exp, critical);
+            Player player = new Player(characterName, jobName, lv, hp, attack, defense, gold, exp, potioncount, critical);
             Shop shop = new Shop();
             DungeonProgram dungeonProgram = new DungeonProgram();
             Hotel rest = new Hotel();
