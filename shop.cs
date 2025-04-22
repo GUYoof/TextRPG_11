@@ -146,7 +146,7 @@ namespace TXT11
 
             for (int i = 0; i < Items.Count; i++)
             {
-                var item = Items[i];
+                Item item = Items[i];
                 string priceText = item.IsSold ? "판매 완료" : $"{item.Price} G";
 
                 string statText = "";
