@@ -32,9 +32,9 @@ using TXT11;
             }
             else
             {
-                //int heal = 30;
-                //HP += heal;
-                //if (HP > MaxHP) HP = MaxHP;
+                int heal = 30;
+                HP += heal;
+                if (HP > MaxHP) HP = MaxHP;
                 PotionCount--;
                 Console.WriteLine($"포션 사용!");
             }
@@ -58,11 +58,12 @@ using TXT11;
                 Attack += 0.5f;
                 Defense +=  1;
                 Console.WriteLine($"레벨업! Lv.{Level - 1} → Lv.{Level}");
+                Console.WriteLine($"공격력 {prevAtk} → {Attack}");
+                Console.WriteLine($"방어력 {prevDef} → {Defense}");
             }
 
             Console.WriteLine($"Exp {prevExp} → {Exp}");
-            Console.WriteLine($"공격력 {prevAtk} → {Attack}");
-            Console.WriteLine($"방어력 {prevDef} → {Defense}");
+
 
         }
 

@@ -70,7 +70,8 @@ namespace TXT11
                 }
                 Console.WriteLine($"현재 HP: {player.HP}");
 
-                Console.WriteLine("던전으로 다시 돌아갑니다...");
+                Console.WriteLine("엔터를 누르면 던전으로 다시 돌아갑니다...");
+                Console.ReadLine();
                 dungeonProgram.DungeonMain(player);
             }
             else if (Choose == 0)
