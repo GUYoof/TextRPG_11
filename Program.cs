@@ -36,13 +36,15 @@ namespace TXT11
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("\n ⚔️ 소드 마스터⚔️  겸 대마법사📖 도전기 ");
             Console.ResetColor();
+            Console.ReadKey();
+            Console.Clear();
             Console.WriteLine("\n\"어서오게나 이세계 청년. 여긴 66666년 전 세계라네.\"");
             Console.Write("\n\"자네 이름이 뭔가?");
             string characterName = Console.ReadLine();
 
             Console.WriteLine($"\n\"{characterName}라 -. 환영하네.\"");
             Console.ReadKey();
-
+            
             string jobName = "";
             int lv = 1, hp = 0, attack = 0, defense = 0, gold = 0, exp = 0, potioncount = 0;
             float critical = 0;
