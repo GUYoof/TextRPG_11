@@ -13,6 +13,7 @@ using TXT11;
         public string Job { get; set; }
         public int Level { get; set; } // = 1;
         public float HP { get; set; }
+        public float MaxHP { get; set; }
         public float Attack { get; set; }
         public int Defense { get; set; }
         public int Gold { get; set; }
@@ -61,6 +62,21 @@ using TXT11;
             Gold = gold;
             Exp = exp;
             Critical = critical;
+            switch (job.ToLower())
+            {
+                case "전사":
+                    MaxHP = 100;
+                    break;
+                case "도적":
+                    MaxHP = 90;
+                    break;
+                case "궁수":
+                    MaxHP = 80;
+                    break;
+                default:
+                    MaxHP = 100; // 기본값
+                    break;
+            }
         }
         public bool CriticalChance()
         {
