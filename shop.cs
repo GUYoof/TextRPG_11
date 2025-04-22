@@ -129,6 +129,7 @@ namespace TXT11
                         else
                         {
                             Console.WriteLine("올바른 번호를 입력해주세요.");
+                            break;
                         }
                         Console.WriteLine("숫자를 입력해주세요.");
 
@@ -221,12 +222,8 @@ namespace TXT11
                             break;
                     }
                     Console.WriteLine("숫자를 입력해주세요.");
-                    Console.ReadLine();
                 }
-
-
                 else Console.WriteLine("Gold가 부족합니다.");
-                Console.ReadLine();
             }
         }
     }
