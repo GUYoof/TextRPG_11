@@ -10,9 +10,40 @@ namespace TXT11
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("안녕하세요. 스파르타 던전에 오신것을 환영합니다.");
-            Console.Write("\n당신의 이름은 무엇입니까?: ");
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.Write("현 생 에 선 게임개발자 인");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(" 르 탄 이 가");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.Write("\n 6 6 6 6 6 년전 ");
+            Console.ResetColor();
+            Console.WriteLine("이 세 계 로  떨"); 
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("\n     ■■■■  ■■■■  ■■■■ ✧  🏢");
+            Console.Write("    ■     ■     ■        ");
+            Console.ResetColor();
+            Console.WriteLine("🏢 🤸‍ 어");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("     ■■■   ■■■   ■■■     🏢");
+            Console.WriteLine("  ✦     ■     ■     ■    🏢");
+            Console.Write("✴︎   ■■■■  ■■■■  ■■■■  ");
+            Console.ResetColor();
+            Console.WriteLine("   🏢    져");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("                      급 🏢");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("\n ⚔️ 소드 마스터⚔️  겸 대마법사📖 도전기 ");
+            Console.ResetColor();
+
+            Console.Clear();
+            Console.WriteLine("\n\"어서오게나 이세계 청년. 여긴 66666년 전 세계라네.\"");
+            Console.Write("\n\"자네 이름이 뭔가?");
             string characterName = Console.ReadLine();
+
+            Console.WriteLine($"\n\"{characterName}라 -. 환영하네.\"");
+            Console.ReadKey();
 
             string jobName = "";
             int lv = 1, hp = 0, attack = 0, defense = 0, gold = 0, exp = 0, potioncount = 0;
@@ -21,11 +52,15 @@ namespace TXT11
 
             while (!validJob)
             {
+                Console.Clear();
+                Console.WriteLine($"\"이 세계를 모험을 하기 위해서는 직업이 필요하다네.\"");
+                Console.WriteLine($"\"자, 어떤 길을 떠날텐가?\"");
                 Console.WriteLine("\n1. 전사");
                 Console.WriteLine("2. 궁수");
                 Console.WriteLine("3. 도적");
-                Console.Write("\n당신의 직업을 선택해주세요: ");
+                
                 string select = Console.ReadLine();
+
 
                 if (int.TryParse(select, out int job))
                 {
@@ -56,15 +91,21 @@ namespace TXT11
                             validJob = true;
                             break;
                         default:
-                            Console.WriteLine("올바른 숫자를 입력하세요.");
+                            Console.WriteLine("\n올바른 숫자를 입력해주세요.");
                             break;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("숫자를 입력하세요.");
+                    Console.WriteLine("\n숫자를 입력해주세요.");
                     Console.ReadLine();
                 }
+
+                Console.Clear();
+                Console.WriteLine($"\n\"{select}... 나쁘지 않은 선택이야.\"");
+                Console.WriteLine($"\"모험을 떠날 준비가 되었는가?\"");
+                Console.ReadKey();
+                Console.WriteLine("\n\"그럼 행운을 빌겠네...\"");
             }
             Player player = new Player(characterName, jobName, lv, hp, attack, defense, gold, exp, potioncount);
             Town town = new Town(player);
@@ -91,15 +132,15 @@ namespace TXT11
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("스파르타 마을에 오신 것을 환영합니다.");
+                Console.WriteLine("마을에 도착했습니다. 여기서는 다양한 활동을 할 수 있습니다.");
                 Console.WriteLine("\n1. 상태 보기");
                 Console.WriteLine("2. 인벤토리");
                 Console.WriteLine("3. 상점");
                 Console.WriteLine("4. 던전 입장");
                 Console.WriteLine("5. 휴식");
                 Console.WriteLine("0. 게임 종료");
-                Console.WriteLine("원하시는 행동을 입력해주세요.");
-                Console.Write("\n>> ");
+                Console.WriteLine("\n원하시는 행동을 입력해주세요.");
+                Console.Write(">> ");
                 string select = Console.ReadLine();
                 if (int.TryParse(select, out int menu))
                 {
