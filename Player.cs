@@ -21,6 +21,7 @@ using TXT11;
         public int Exp { get; set; } // = 5;
         public int PotionCount { get; set; } = 0;
         public float Critical { get; set; }
+        public float Avoid { get; set; }
         
         private static readonly int[] LevelRequirements = { 10, 35, 65, 100 }; // 레벨업에 필요한 경험치
 
@@ -89,14 +90,17 @@ using TXT11;
                 case "전사":
                     MaxHP = 100;
                     Critical = 0.2f;
+                    Avoid = 0.1f;
                     break;
                 case "도적":
                     MaxHP = 90;
                     Critical = 0.4f;
+                    Avoid = 0.3f;
                     break;
                 case "궁수":
                     MaxHP = 80;
                     Critical = 0.3f;
+                    Avoid = 0.2f;
                     break;
                 default:
                     MaxHP = 100; // 기본값
@@ -108,6 +112,13 @@ using TXT11;
             Random rand = new Random();
             float roll = (float)rand.NextDouble(); // 0.0 ~ 1.0 사이의 난수
             return roll < Critical; // 예: Critical = 0.2f -> 20% 확률
+        }
+
+        public bool AvoidChance()
+        {
+            Random rand = new Random();
+            float roll = (float)rand.NextDouble(); // 0.0 ~ 1.0 사이의 난수
+            return roll < Avoid; // 예: Critical = 0.2f -> 20% 확률
         }
 
         public float GetTotalAttack()
