@@ -157,6 +157,7 @@ namespace TXT11
                 Battlesystem battle = new Battlesystem(player, selectedDungeon.Monster);
                 battle.DungeonEnter();
                 Campfire campfire = new Campfire();
+                DungeonProgram dp = new DungeonProgram();
                 if (player.HP <= 0) break;
 
                 Console.WriteLine("\n전투 후 행동 선택:");
@@ -172,11 +173,11 @@ namespace TXT11
                 }
                 else if (choice == "2")
                 {
-                    battle.DungeonEnter();
+                    DungeonMain(player);
                 }
                 else if (choice == "3")
                 {
-                    campfire.Rest(player, battle);
+                    campfire.Rest(player, dp);
                 }
 
             }

@@ -51,7 +51,7 @@ namespace TXT11
     public class Campfire
     {
         
-        public void Rest(Player player, Battlesystem battlesystem)
+        public void Rest(Player player, DungeonProgram dungeonProgram)
         {
             Console.Clear();
             Console.WriteLine("모닥불에서 휴식하기");
@@ -67,7 +67,7 @@ namespace TXT11
                 Console.WriteLine($"현재 HP: {player.HP}");
 
                 Console.WriteLine("던전으로 다시 돌아갑니다...");
-                battlesystem.DungeonEnter();
+                dungeonProgram.DungeonMain(player);
             }
             else if (Choose == 0)
             {
@@ -76,7 +76,7 @@ namespace TXT11
             else
             {
                 Console.WriteLine("잘못된 입력입니다");
-                Rest(player, battlesystem);
+                Rest(player, dungeonProgram);
             }
         }
     }
