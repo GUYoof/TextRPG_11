@@ -100,7 +100,6 @@ namespace TXT11
 
                 if (monster.HP <= 0)
                 {
-                    Console.WriteLine($"{monster.Name}을(를) 쓰러뜨렸습니다! 골드 +{monster.GoldReward}");
                     player.Gold += monster.GoldReward;
                     player.Exp += monster.ExpReward;
 
