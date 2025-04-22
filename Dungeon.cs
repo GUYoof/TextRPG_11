@@ -67,7 +67,7 @@ namespace TXT11
                 float damage = player.Attack;
                 if (player.CriticalChance())
                 {
-                    damage *= 2;
+                    damage *= 1.6f;
                     Console.WriteLine("⚡ 크리티컬 히트! ⚡");
                 }
                 monster.HP -= damage;
