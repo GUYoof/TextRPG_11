@@ -80,17 +80,19 @@ using TXT11;
             Gold = gold;
             Exp = exp;
             PotionCount = potioncount;
-            Critical = critical;
             switch (job.ToLower())
             {
                 case "전사":
                     MaxHP = 100;
+                    Critical = 0.2f;
                     break;
                 case "도적":
                     MaxHP = 90;
+                    Critical = 0.4f;
                     break;
                 case "궁수":
                     MaxHP = 80;
+                    Critical = 0.3f;
                     break;
                 default:
                     MaxHP = 100; // 기본값

@@ -97,6 +97,7 @@ namespace TXT11
             while (player.HP > 0 && monster.HP > 0)
             {
                 Console.WriteLine("\n1. 공격");
+                Console.WriteLine("2. 포션 사용");
                 Console.Write("행동 선택: ");
                 string input = Console.ReadLine();
 
