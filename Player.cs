@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using TXT11;
@@ -20,6 +21,7 @@ using TXT11;
         public int Exp { get; set; } // = 5;
         public int PotionCount { get; set; } = 0;
         public float Critical { get; set; }
+        public float Avoid { get; set; }
         
         private static readonly int[] LevelRequirements = { 10, 35, 65, 100 }; // 레벨업에 필요한 경험치
 
@@ -28,6 +30,7 @@ using TXT11;
             if (PotionCount <= 0)
             {
                 Console.WriteLine("포션이 없습니다!");
+                Console.WriteLine("빈 인벤토리를 뒤적거리다가 쳐 맞았습니다!");
                 return;
             }
             else
@@ -37,6 +40,7 @@ using TXT11;
                 if (HP > MaxHP) HP = MaxHP;
                 PotionCount--;
                 Console.WriteLine($"포션 사용!");
+                Console.WriteLine($"남은 포션 개수 : {PotionCount}");
             }
         }
 
@@ -86,14 +90,17 @@ using TXT11;
                 case "전사":
                     MaxHP = 100;
                     Critical = 0.2f;
+                    Avoid = 0.1f;
                     break;
                 case "도적":
                     MaxHP = 90;
                     Critical = 0.4f;
+                    Avoid = 0.3f;
                     break;
                 case "궁수":
                     MaxHP = 80;
                     Critical = 0.3f;
+                    Avoid = 0.2f;
                     break;
                 default:
                     MaxHP = 100; // 기본값
@@ -105,6 +112,13 @@ using TXT11;
             Random rand = new Random();
             float roll = (float)rand.NextDouble(); // 0.0 ~ 1.0 사이의 난수
             return roll < Critical; // 예: Critical = 0.2f -> 20% 확률
+        }
+
+        public bool AvoidChance()
+        {
+            Random rand = new Random();
+            float roll = (float)rand.NextDouble(); // 0.0 ~ 1.0 사이의 난수
+            return roll < Avoid; // 예: Critical = 0.2f -> 20% 확률
         }
 
         public float GetTotalAttack()
@@ -149,7 +163,7 @@ using TXT11;
             Console.WriteLine($"| 방어력 : {defenseText}");
             Console.WriteLine($"| Gold   : {Gold}");
             Console.WriteLine("===========================");
-            Console.WriteLine("엔터를 누르면 마을 화면으로 갑니다.");
+            Console.WriteLine("엔터를 누르면 이전 화면으로 갑니다.");
             Console.ReadLine();
         }
 
