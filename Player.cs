@@ -5,8 +5,9 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using TXT11;
+using static System.Net.Mime.MediaTypeNames;
 
- namespace TXT11
+namespace TXT11
 {
     public class Player
     {
@@ -23,6 +24,7 @@ using TXT11;
         public float Critical { get; set; }
         public float Avoid { get; set; }
         
+        private static Random rand = new Random();
         private static readonly int[] LevelRequirements = { 10, 35, 65, 100 }; // 레벨업에 필요한 경험치
 
         public void UsePotion()
@@ -60,7 +62,7 @@ using TXT11;
                 Exp -= LevelRequirements[Level - 1];
                 Level++;
                 Attack += 0.5f;
-                Defense +=  1;
+                Defense += 1;
                 Console.WriteLine($"레벨업! Lv.{Level - 1} → Lv.{Level}");
                 Console.WriteLine($"공격력 {prevAtk} → {Attack}");
                 Console.WriteLine($"방어력 {prevDef} → {Defense}");
@@ -74,6 +76,7 @@ using TXT11;
         public List<Item> Inventory { get; private set; } = new List<Item>();
 
         // 레벨업 보상 attack 0.5f , float으로 바꿔야함.
+
         public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , int potioncount)
         {
             Name = name;
@@ -109,16 +112,14 @@ using TXT11;
         }
         public bool CriticalChance()
         {
-            Random rand = new Random();
-            float roll = (float)rand.NextDouble(); // 0.0 ~ 1.0 사이의 난수
-            return roll < Critical; // 예: Critical = 0.2f -> 20% 확률
+            float roll = (float)rand.NextDouble();
+            return roll < Critical;
         }
 
         public bool AvoidChance()
         {
-            Random rand = new Random();
-            float roll = (float)rand.NextDouble(); // 0.0 ~ 1.0 사이의 난수
-            return roll < Avoid; // 예: Critical = 0.2f -> 20% 확률
+            float roll = (float)rand.NextDouble();
+            return roll < Avoid;
         }
 
         public float GetTotalAttack()

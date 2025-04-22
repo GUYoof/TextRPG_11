@@ -28,8 +28,10 @@ namespace TXT11
             {
                 if (player.Gold >= 500)
                 {
+                    Console.Clear() ;
                     Console.WriteLine("휴식을 취합니다.");
                     Console.WriteLine("-500골드");
+                    Console.ReadKey();
 
                     player.HP = player.MaxHP;
                     player.Gold -= 500;
@@ -38,6 +40,9 @@ namespace TXT11
             }
             else if (Choose == 0)
             {
+                Console.WriteLine($"골드가 부족합니다.현재 골드 : {player.Gold}");
+                Console.ReadKey();
+                Console.Clear();
                 return;
             }
             else
@@ -68,10 +73,28 @@ namespace TXT11
                 {
                     player.HP = player.MaxHP;
                 }
-                Console.WriteLine($"현재 HP: {player.HP}");
 
-                Console.WriteLine("엔터를 누르면 던전으로 다시 돌아갑니다...");
-                Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("\n   ◆   ◆");
+                Console.WriteLine("  ◆◆◇ ◆◆◇");
+                Console.WriteLine(" ◆◆◆◇◇◆◆◇");
+                Console.WriteLine(" ◆◆◆◇◇◆◆◆◇");
+                Console.Write("◆◆◆◆◆◇◇◆◇◇");
+                Console.ResetColor();
+                Console.WriteLine(" ○");
+                Console.WriteLine("   ▒   ▒   |┘┘");
+                Console.WriteLine("   ▒   ▒   └═┐┐      ");
+                Console.WriteLine("   ▒      ▓▓ └└   🔥 ");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.Write("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write("// \\\\");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲");
+                Console.ResetColor();
+                Console.WriteLine($"현재 HP: {player.HP}");
+                Console.WriteLine("\n아침이 밝아옵니다 다음엔 어떤 던전을 탐사할까요?");
+                Console.ReadKey();
                 dungeonProgram.DungeonMain(player);
             }
             else if (Choose == 0)

@@ -148,7 +148,7 @@ namespace TXT11
     private void MonsterAttack(Monster monster)
     {
         Console.WriteLine($"\n[{monster.Name}의 반격!]");
-        if (!player.AvoidChance())
+        if (player.AvoidChance())
         {
             Console.WriteLine("플레이어가 공격을 회피했습니다!");
             return;
@@ -169,12 +169,12 @@ namespace TXT11
         public void DungeonMain(Player player)
         {
             Random random = new Random();
-            int randomNumber = random.Next(0, 6);
             List<Dungeon> dungeons = new List<Dungeon>
             {
-                new Dungeon("고블린 던전", new Monster("고블린", 30 + 5*randomNumber, 10+randomNumber, 5+randomNumber, 15 + randomNumber)),
-                new Dungeon("오크 던전", new Monster("오크", 50 + 5*randomNumber, 17 + randomNumber, 10 + randomNumber, 30 + randomNumber)),
-                new Dungeon("하이오크 던전", new Monster("하이오크", 70 + 5*randomNumber, 24 + randomNumber, 15+randomNumber, 100 + randomNumber)),
+                new Dungeon("고블린 던전", new Monster("고블린", 10 , 7, 5 , 15 )),
+                new Dungeon("오크 던전", new Monster("오크", 30 , 10 , 10 , 30 )),
+                new Dungeon("하이오크 던전", new Monster("하이오크", 50  , 15 , 15, 100 )),
+                new Dungeon("오크사령관", new Monster("오크사령관",70, 20, 30, 200)),
             };
 
             while (true)
