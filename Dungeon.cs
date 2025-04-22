@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TXT11;
-using static TXT11.Program;
+
 
 namespace TXT11
 {

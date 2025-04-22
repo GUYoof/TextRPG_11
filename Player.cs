@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using TXT11;
@@ -28,6 +29,7 @@ using TXT11;
             if (PotionCount <= 0)
             {
                 Console.WriteLine("포션이 없습니다!");
+                Console.WriteLine("빈 인벤토리를 뒤적거리다가 쳐 맞았습니다!");
                 return;
             }
             else
@@ -37,6 +39,7 @@ using TXT11;
                 if (HP > MaxHP) HP = MaxHP;
                 PotionCount--;
                 Console.WriteLine($"포션 사용!");
+                Console.WriteLine($"남은 포션 개수 : {PotionCount}");
             }
         }
 
@@ -146,7 +149,7 @@ using TXT11;
             Console.WriteLine($"| 방어력 : {defenseText}");
             Console.WriteLine($"| Gold   : {Gold}");
             Console.WriteLine("===========================");
-            Console.WriteLine("엔터를 누르면 마을 화면으로 갑니다.");
+            Console.WriteLine("엔터를 누르면 이전 화면으로 갑니다.");
             Console.ReadLine();
         }
 
