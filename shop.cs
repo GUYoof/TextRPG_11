@@ -50,19 +50,18 @@ namespace TXT11
             //    Console.WriteLine($"- {item.Name} : {statText} {item.Description} ({priceText})");
             //}
 
-                for (int i = 0; i < Items.Count; i++)
+            for (int i = 0; i < Items.Count; i++)
             {
                 string priceText = Items[i].IsSold ? "판매 완료" : $"{Items[i].Price} G";
-
                 string statText = "";
                 if (Items[i].Type == ItemType.Weapon && Items[i].Attack > 0)
-                {
-                    statText = $"공격력 +{Items[i].Attack}";
-                }
+                    {
+                        statText = $"공격력 +{Items[i].Attack}";
+                    }
                 else if (Items[i].Type == ItemType.Armor && Items[i].Defense > 0)
-                {
-                    statText = $"방어력 +{Items[i].Defense}";
-                }
+                    {
+                        statText = $"방어력 +{Items[i].Defense}";
+                    }
 
                 Console.WriteLine($"- {Items[i].Name} : {statText} {Items[i].Description} ({priceText})");
             }
@@ -118,9 +117,9 @@ namespace TXT11
             while (true)
             {
                 ShowItemList(player);
-                Console.WriteLine("\n1. 아이템 구매");
-                Console.WriteLine("2. 포션 구매");
-                Console.WriteLine("0. 나가기");
+                Console.WriteLine("\n[1]. 아이템 구매");
+                Console.WriteLine("[2]. 포션 구매");
+                Console.WriteLine("[0]. 나가기");
                 Console.WriteLine("\n원하는 행동을 입력하세요.");
                 Console.Write("\n선택: ");
 
@@ -161,7 +160,10 @@ namespace TXT11
         public void ProceedPurchase(Player player)
         {
             Console.Clear();
-            Console.WriteLine("구매할 아이템 번호를 선택하세요.\n");
+            Console.Clear();
+            Console.WriteLine("상점");
+            Console.WriteLine("[보유 골드]");
+            Console.WriteLine($"{player.Gold} G\n");
 
             for (int i = 0; i < Items.Count; i++)
             {
@@ -180,8 +182,8 @@ namespace TXT11
                 Console.WriteLine($" [{i + 1}].  {item.Name} : {statText} {item.Description} ({priceText})");
             }
 
-            Console.WriteLine("\n0. 취소하고 돌아가기");
-
+            Console.WriteLine("\n구매할 아이템 번호를 선택하세요.\n");
+            Console.WriteLine("\n엔터를 누르면 돌아갑니다.");
             Console.Write("\n선택: ");
             string select = Console.ReadLine();
 
@@ -211,7 +213,12 @@ namespace TXT11
             Item selectedItem = Items[index - 1];
 
             if (player.Inventory.Any(i => i.Name == selectedItem.Name))
+            {
                 Console.WriteLine("이미 구매한 아이템입니다.");
+                Console.WriteLine("\n엔터를 누르면 돌아갑니다.");
+                Console.ReadLine();
+                ProceedPurchase(player);
+            }
 
 
             else if (player.Gold >= selectedItem.Price)
@@ -224,7 +231,7 @@ namespace TXT11
                 Console.WriteLine($"'{selectedItem.Name}'을(를) 구매했습니다!");
                 Console.WriteLine($"바로 인벤토리로 이동하시겠습니까?");
                 Console.WriteLine($"\n[1]. [인벤토리로 이동]");
-                Console.WriteLine($"[2]. [추가로 구매하기 ]");
+                Console.WriteLine($"[2]. [추가로 구매하기]");
 
                 string select = Console.ReadLine();
                 if (int.TryParse(select, out int output))
