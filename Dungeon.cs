@@ -142,6 +142,7 @@ namespace TXT11
 
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("\n--- 던전을 선택하세요 ---");
                 for (int i = 0; i < dungeons.Count; i++)
                     Console.WriteLine($"{i + 1}. {dungeons[i].Name}");
