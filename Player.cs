@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using TXT11;
+using static System.Net.Mime.MediaTypeNames;
 
- namespace TXT11
+namespace TXT11
 {
     public class Player
     {
@@ -20,7 +22,7 @@ using TXT11;
         public int Exp { get; set; } // = 5;
         public int PotionCount { get; set; } = 0;
         public float Critical { get; set; }
-        
+
         private static readonly int[] LevelRequirements = { 10, 35, 65, 100 }; // 레벨업에 필요한 경험치
 
         public void UsePotion()
@@ -56,7 +58,7 @@ using TXT11;
                 Exp -= LevelRequirements[Level - 1];
                 Level++;
                 Attack += 0.5f;
-                Defense +=  1;
+                Defense += 1;
                 Console.WriteLine($"레벨업! Lv.{Level - 1} → Lv.{Level}");
             }
 
@@ -69,7 +71,7 @@ using TXT11;
         public List<Item> Inventory { get; private set; } = new List<Item>();
 
         // 레벨업 보상 attack 0.5f , float으로 바꿔야함.
-        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , int potioncount, float critical)
+        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp, int potioncount, float critical)
         {
             Name = name;
             Job = job;
@@ -282,6 +284,24 @@ using TXT11;
 
             Console.WriteLine("\n엔터를 누르면 돌아갑니다.");
             Console.ReadLine();
+        }
+        public class Avoid
+        {
+            public void avoid(Player player, float damage)
+            {
+                int Avoid = new Random().Next(1, 100);
+                if (Avoid > 20)
+                {
+                    Console.WriteLine($"회피에 실패했습니다. 현재 HP: {player.HP}");
+                    player.HP -= damage;
+                    Console.WriteLine($"플레이어가 {damage} 데미지를 입었습니다. 현재 HP: {player.HP}");
+                }
+                else
+                {
+                    Console.WriteLine($"회피에 성공했습니다. 현재 HP: {player.HP}");
+                }
+
+            }
         }
     }
 }
