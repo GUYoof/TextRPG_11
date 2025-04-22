@@ -27,15 +27,15 @@ namespace TXT11
     public class Monster
     {
         public string Name;
-        public int HP;
-        public int Attack;
+        public float HP;
+        public float Attack;
         public int ExpReward;
         public int GoldReward;
 
         
 
 
-        public Monster(string name, int hp, int atk, int exp, int gold)
+        public Monster(string name, int hp, float atk, int exp, int gold)
         {
             Name = name;
             HP = hp;

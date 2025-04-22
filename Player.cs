@@ -13,7 +13,7 @@ using TXT11;
         public string Job { get; set; }
         public int Level { get; set; } // = 1;
         public int HP { get; set; }
-        public int Attack { get; set; }
+        public float Attack { get; set; }
         public int Defense { get; set; }
         public int Gold { get; set; }
         public int Exp { get; set; } // = 5;
@@ -35,7 +35,7 @@ using TXT11;
             {
                 Exp -= LevelRequirements[Level - 1];
                 Level++;
-                // Attack += 0.5f;
+                Attack += 0.5f;
                 Defense +=  1;
                 Console.WriteLine($"레벨업! Lv.{Level - 1} → Lv.{Level}");
             }
@@ -49,7 +49,7 @@ using TXT11;
         public List<Item> Inventory { get; private set; } = new List<Item>();
 
         // 레벨업 보상 attack 0.5f , float으로 바꿔야함.
-        public Player(string name, string job, int level, int hp, int attack, int defense, int gold, int exp)
+        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp)
         {
             Name = name;
             Job = job;
@@ -61,7 +61,7 @@ using TXT11;
             Exp = exp;
         }
 
-        public int GetTotalAttack()
+        public float GetTotalAttack()
         {
             int bonus = Inventory.Where(i => i.Type == ItemType.Weapon).Sum(i => i.Attack);
             return Attack + bonus;
@@ -75,7 +75,7 @@ using TXT11;
 
         public void ShowStatus()
         {
-            int bonusAttack = 0;
+            float bonusAttack = 0;
             int bonusDefense = 0;
 
             foreach (var item in Inventory)

@@ -62,11 +62,11 @@ namespace TXT11
                 Console.Write("\n선택: ");
                 string select = Console.ReadLine();
 
-                if (int.TryParse(select, out int Difficulty))
+                if (int.TryParse(select, out int purchase))
                 {
-                    if (Difficulty == 0)
+                    if (purchase == 0)
                         return;
-                    else if (Difficulty >= 1 && Difficulty <= Items.Count)
+                    else if (purchase >= 1 && purchase <= Items.Count)
                     {
                         ProceedPurchase(player);
                     }

@@ -13,13 +13,13 @@ namespace TXT11
         public int Price { get; set; }
         public string Description { get; set; }
         public ItemType Type { get; }
-        public int Attack { get; set; }
+        public float Attack { get; set; }
         public int Defense { get; set; }
 
         public bool IsSold { get; set; } = false;
         public bool IsEquipped = false;
 
-        public Item(string name, string description, int price, ItemType type, int attact = 0, int defense = 0)
+        public Item(string name, string description, int price, ItemType type, float attact = 0, int defense = 0)
         {
             Name = name;
             Price = price;
