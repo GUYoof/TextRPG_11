@@ -34,20 +34,37 @@ namespace TXT11
             Console.WriteLine($"{player.Gold} G\n");
 
             Console.WriteLine("[아이템 목록]");
-            foreach (var item in Items)
+            //            foreach (Item item in Items)
+            //{
+            //    string priceText = item.IsSold ? "판매 완료" : $"{item.Price} G";
+
+            //    string statText = "";
+            //    if (item.Type == ItemType.Weapon && item.Attack > 0)
+            //    {
+            //        statText = $"공격력 +{item.Attack}";
+            //    }
+            //    else if (item.Type == ItemType.Armor && item.Defense > 0)
+            //    {
+            //        statText = $"방어력 +{item.Defense}";
+            //    }
+            //    Console.WriteLine($"- {item.Name} : {statText} {item.Description} ({priceText})");
+            //}
+
+                for (int i = 0; i < Items.Count; i++)
             {
-                string priceText = item.IsSold ? "판매 완료" : $"{item.Price} G";
+                string priceText = Items[i].IsSold ? "판매 완료" : $"{Items[i].Price} G";
 
                 string statText = "";
-                if (item.Type == ItemType.Weapon && item.Attack > 0)
+                if (Items[i].Type == ItemType.Weapon && Items[i].Attack > 0)
                 {
-                    statText = $"공격력 +{item.Attack}";
+                    statText = $"공격력 +{Items[i].Attack}";
                 }
-                else if (item.Type == ItemType.Armor && item.Defense > 0)
+                else if (Items[i].Type == ItemType.Armor && Items[i].Defense > 0)
                 {
-                    statText = $"방어력 +{item.Defense}";
+                    statText = $"방어력 +{Items[i].Defense}";
                 }
-                Console.WriteLine($"- {item.Name} : {statText} {item.Description} ({priceText})");
+
+                Console.WriteLine($"- {Items[i].Name} : {statText} {Items[i].Description} ({priceText})");
             }
         }
 
@@ -90,7 +107,6 @@ namespace TXT11
                         }
                         else Console.WriteLine("소지 가능한 포션 수를 초과했습니다.");
                     }
-
                     else Console.WriteLine("올바른 값을 입력해주세요");
                 } while (true);
             }
@@ -108,9 +124,10 @@ namespace TXT11
                 Console.WriteLine("\n원하는 행동을 입력하세요.");
                 Console.Write("\n선택: ");
 
-                string select = Console.ReadLine();
                 do
                 {
+                    string select = Console.ReadLine();
+
                     if (int.TryParse(select, out int output) && output >= 0)
                     {
                         if (output == 0)
@@ -121,6 +138,7 @@ namespace TXT11
                         else if (output == 1)
                         {
                             ProceedPurchase(player);
+                            break;
                         }
                         else if (output == 2)
                         {
@@ -134,6 +152,7 @@ namespace TXT11
                         Console.WriteLine("숫자를 입력해주세요.");
 
                     }
+                    return;
                 } while (true);
 
             }
@@ -158,12 +177,12 @@ namespace TXT11
                 {
                     statText = $"방어력 +{item.Defense}";
                 }
-                Console.WriteLine($"{i + 1}.  {item.Name} : {statText} {item.Description} ({priceText})");
+                Console.WriteLine($" [{i + 1}].  {item.Name} : {statText} {item.Description} ({priceText})");
             }
-            Console.WriteLine("\n어떤 아이템을 구매하겠습니까? 번호를 입력하세요.");
-            Console.WriteLine("\n0. 취소하고 돌아가기");
-            Console.Write("\n선택: ");
 
+            Console.WriteLine("\n0. 취소하고 돌아가기");
+
+            Console.Write("\n선택: ");
             string select = Console.ReadLine();
 
             if (int.TryParse(select, out int index))
@@ -189,9 +208,12 @@ namespace TXT11
 
         public void HandlePurchase(Player player, int index)
         {
-            var selectedItem = Items[index - 1];
+            Item selectedItem = Items[index - 1];
+
             if (player.Inventory.Any(i => i.Name == selectedItem.Name))
                 Console.WriteLine("이미 구매한 아이템입니다.");
+
+
             else if (player.Gold >= selectedItem.Price)
             {
                 player.Gold -= selectedItem.Price;
@@ -201,9 +223,8 @@ namespace TXT11
 
                 Console.WriteLine($"'{selectedItem.Name}'을(를) 구매했습니다!");
                 Console.WriteLine($"바로 인벤토리로 이동하시겠습니까?");
-                Console.WriteLine($"\n1. [인벤토리로 이동]");
-                Console.WriteLine($"0. [상점으로 돌아가기 ]");
-
+                Console.WriteLine($"\n[1]. [인벤토리로 이동]");
+                Console.WriteLine($"[2]. [추가로 구매하기 ]");
 
                 string select = Console.ReadLine();
                 if (int.TryParse(select, out int output))
@@ -213,9 +234,9 @@ namespace TXT11
                         case 1:
                             player.ShowInventory();
                             break;
-                        case 0:
-                            ShopEnter(player);
-                            return;
+                        case 2:
+                            ProceedPurchase(player);
+                            break;
                         default:
                             Console.WriteLine("올바른 숫자를 입력해주세요.");
                             Console.ReadLine();
@@ -223,8 +244,16 @@ namespace TXT11
                     }
                     Console.WriteLine("숫자를 입력해주세요.");
                 }
-                else Console.WriteLine("Gold가 부족합니다.");
             }
+            if ( player.Gold < selectedItem.Price)
+            {
+                Console.WriteLine("\n");
+                Console.WriteLine("Gold가 부족합니다.");
+                Console.WriteLine("\n엔터를 누르면 돌아갑니다.");
+                Console.ReadLine();
+                ProceedPurchase(player);
+            }
+            
         }
     }
 }
