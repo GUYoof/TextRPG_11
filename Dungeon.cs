@@ -31,6 +31,9 @@ namespace TXT11
         public int ExpReward;
         public int GoldReward;
 
+        
+
+
         public Monster(string name, int hp, int atk, int exp, int gold)
         {
             Name = name;
@@ -99,6 +102,12 @@ namespace TXT11
                 {
                     Console.WriteLine($"{monster.Name}을(를) 쓰러뜨렸습니다! 골드 +{monster.GoldReward}");
                     player.Gold += monster.GoldReward;
+                    player.Exp += monster.ExpReward;
+
+                    Console.WriteLine($"{monster.Name}을(를) 쓰러뜨렸습니다! \n골드 +{monster.GoldReward}");
+                    // Console.WriteLine($"Exp {prevExp} → {Exp}");
+                    // Console.WriteLine($"공격력 {prevAtk} → {Attack}");
+                    // Console.WriteLine($"방어력 {prevDef} → {Defense}");
                     break;
                 }
 

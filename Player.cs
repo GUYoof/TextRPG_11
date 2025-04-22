@@ -11,15 +11,45 @@ using TXT11;
     {
         public string Name { get; set; }
         public string Job { get; set; }
-        public int Level { get; set; }
+        public int Level { get; set; } // = 1;
         public int HP { get; set; }
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int Gold { get; set; }
+        public int Exp { get; set; } // = 5;
+        
+        private static readonly int[] LevelRequirements = { 10, 35, 65, 100 }; // 레벨업에 필요한 경험치
+
+        // 레벨업 보상 경험치 ...
+        public void GainExp(int amount)
+        {
+            Console.WriteLine($"경험치 +{amount}");
+            int prevLevel = Level;
+            int prevExp = Exp;
+            float prevAtk = Attack;
+            int prevDef = Defense;
+
+            Exp += amount;
+
+            while (Level - 1 < LevelRequirements.Length && Exp >= LevelRequirements[Level - 1])
+            {
+                Exp -= LevelRequirements[Level - 1];
+                Level++;
+                // Attack += 0.5f;
+                Defense +=  1;
+                Console.WriteLine($"레벨업! Lv.{Level - 1} → Lv.{Level}");
+            }
+
+            Console.WriteLine($"Exp {prevExp} → {Exp}");
+            Console.WriteLine($"공격력 {prevAtk} → {Attack}");
+            Console.WriteLine($"방어력 {prevDef} → {Defense}");
+
+        }
 
         public List<Item> Inventory { get; private set; } = new List<Item>();
 
-        public Player(string name, string job, int level, int hp, int attack, int defense, int gold)
+        // 레벨업 보상 attack 0.5f , float으로 바꿔야함.
+        public Player(string name, string job, int level, int hp, int attack, int defense, int gold, int exp)
         {
             Name = name;
             Job = job;
@@ -28,6 +58,7 @@ using TXT11;
             Attack = attack;
             Defense = defense;
             Gold = gold;
+            Exp = exp;
         }
 
         public int GetTotalAttack()
@@ -57,6 +88,7 @@ using TXT11;
             Console.WriteLine("===========================");
             Console.WriteLine($"| 이름   : {Name}");
             Console.WriteLine($"| 레벨   : {Level}");
+            Console.WriteLine($"| 경험치 : {Exp}");
             Console.WriteLine($"| 직업   : {Job}");
             Console.WriteLine($"| 체력   : {HP}");
 
