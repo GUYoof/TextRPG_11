@@ -65,7 +65,7 @@
             Player player = new Player(characterName, jobName, lv, hp, attack, defense, gold);
             Shop shop = new Shop();
             DungeonProgram dungeonProgram = new DungeonProgram();
-            Hotel hotel = new Hotel();
+            Hotel rest = new Hotel();
 
             while (true)
             {
@@ -75,7 +75,7 @@
                 Console.WriteLine("2. 인벤토리");
                 Console.WriteLine("3. 상점");
                 Console.WriteLine("4. 던전 입장");
-                Console.WriteLine("5. 여관 입장");
+                Console.WriteLine("5. 휴식");
                 Console.WriteLine("0. 게임 종료");
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write("\n>> ");
@@ -97,7 +97,7 @@
                             dungeonProgram.DungeonMain(player);
                             break;
                         case 5:
-                            hotel.Rest(player);
+                            rest.Rest(player);
                             break;
                         case 0:
                             Console.WriteLine("게임을 종료합니다.");
