@@ -69,7 +69,7 @@ using TXT11;
         public List<Item> Inventory { get; private set; } = new List<Item>();
 
         // 레벨업 보상 attack 0.5f , float으로 바꿔야함.
-        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , int potioncount, float critical)
+        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , int potioncount)
         {
             Name = name;
             Job = job;

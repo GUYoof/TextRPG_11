@@ -33,7 +33,7 @@ namespace TXT11
 
                     player.HP = player.MaxHP;
                     player.Gold -= 500;
-
+                    
                 }
             }
             else if (Choose == 0)
