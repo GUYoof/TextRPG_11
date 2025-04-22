@@ -17,8 +17,27 @@ using TXT11;
         public int Defense { get; set; }
         public int Gold { get; set; }
         public int Exp { get; set; } // = 5;
-        
+
+        public int PotionCount { get; set; } = 0;
+
         private static readonly int[] LevelRequirements = { 10, 35, 65, 100 }; // 레벨업에 필요한 경험치
+
+        public void UsePotion()
+        {
+            if (PotionCount <= 0)
+            {
+                Console.WriteLine("포션이 없습니다!");
+                return;
+            }
+            else
+            {
+                int heal = 30;
+                HP += heal;
+                if (HP > MaxHP) HP = MaxHP;
+                PotionCount--;
+                Console.WriteLine($"포션 사용! HP +{heal} (현재 HP: {HP})");
+            }
+        }
 
         // 레벨업 보상 경험치 ...
         public void GainExp(int amount)
