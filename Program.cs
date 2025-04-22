@@ -36,8 +36,6 @@ namespace TXT11
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("\n ⚔️ 소드 마스터⚔️  겸 대마법사📖 도전기 ");
             Console.ResetColor();
-
-            Console.Clear();
             Console.WriteLine("\n\"어서오게나 이세계 청년. 여긴 66666년 전 세계라네.\"");
             Console.Write("\n\"자네 이름이 뭔가?");
             string characterName = Console.ReadLine();
