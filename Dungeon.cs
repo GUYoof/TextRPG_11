@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TXT11;
 
 namespace TXT11
 {
@@ -147,7 +148,7 @@ namespace TXT11
                 var selectedDungeon = dungeons[dungeonChoice - 1];
                 battlesystem battle = new battlesystem(player, selectedDungeon.Monster);
                 battle.DungeonEnter();
-
+                Campfire campfire = new Campfire();
                 if (player.HP <= 0) break;
 
                 Console.WriteLine("\n전투 후 행동 선택:");
@@ -159,9 +160,6 @@ namespace TXT11
 
                 if (choice == "1") //여관으로 돌아가기
                 {
-                    //Console.WriteLine("여관으로 돌아갑니다.");
-                    //Hotel hotel = new Hotel();
-                    //hotel.Rest(player);
                     return;
                 }
                 else if (choice == "2")
@@ -170,11 +168,7 @@ namespace TXT11
                 }
                 else if (choice == "3")
                 {
-                    Console.WriteLine("모닥불을 피우고 휴식을 취합니다.");
-                    player.HP += 30;
-                    Console.WriteLine($"{player.HP}");
-                    Console.WriteLine("다음날 아침이 되자 몬스터가 습격해왔습니다.");
-                    battle.DungeonEnter();
+                    campfire.Rest(player);
                 }
 
             }
