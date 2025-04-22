@@ -31,11 +31,11 @@ using TXT11;
             }
             else
             {
-                int heal = 30;
-                HP += heal;
-                if (HP > MaxHP) HP = MaxHP;
+                //int heal = 30;
+                //HP += heal;
+                //if (HP > MaxHP) HP = MaxHP;
                 PotionCount--;
-                Console.WriteLine($"포션 사용! HP +{heal} (현재 HP: {HP})");
+                Console.WriteLine($"포션 사용!");
             }
         }
 
