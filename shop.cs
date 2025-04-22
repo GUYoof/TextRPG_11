@@ -61,13 +61,14 @@ namespace TXT11
                 Console.WriteLine("[보유 골드]");
                 Console.WriteLine($"{player.Gold} G\n");
 
-                Console.WriteLine($"\n 포션 가격: 30G  {player.PotionCount} / {maxPotionCount}(최대포션갯수)" );
+                Console.WriteLine($"\n [(최대소지갯수) : {maxPotionCount}]");
+
+                Console.WriteLine($" 포션 가격: 30G " );
                 Console.Write("몇 개 구매하시겠습니까?");
                 Console.WriteLine("[0]. 상점으로 돌아가기");
                 do
                 {
-
-                    if (int.TryParse(Console.ReadLine(), out int amount) && amount >= 0 && amount <= (maxPotionCount - player.PotionCount))
+                    if (int.TryParse(Console.ReadLine(), out int amount) && amount >= 0 )
                     {
                         int cost = amount * 30;
 
@@ -77,20 +78,20 @@ namespace TXT11
                             ShopEnter(player);
                         }
 
-                        else
+                        else if (amount <= maxPotionCount - player.PotionCount)
                         {
-
                             if (player.Gold >= cost)
                             {
                                 player.Gold -= cost;
                                 player.PotionCount += amount;
-                                Console.WriteLine($"포션 {amount}개 구매 완료. 남은 골드: {player.Gold}");
+                                Console.WriteLine($"포션 {amount}개 구매 완료. 현재 포션{player.PotionCount} / {maxPotionCount}(최대포션갯수) 남은 골드: {player.Gold}");
                             }
                             else Console.WriteLine("골드가 부족합니다.");
                         }
+                        else Console.WriteLine("소지 가능한 포션 수를 초과했습니다.");
                     }
 
-                    else Console.WriteLine("소지 가능한 포션 수를 초과했습니다.");
+                    else Console.WriteLine("올바른 값을 입력해주세요");
                 } while (true);
             }
         }
@@ -114,7 +115,8 @@ namespace TXT11
                     {
                         if (output == 0)
                         {
-                            return;
+                            Town town = new Town(player);
+                            town.TownMain();
                         }
                         else if (output == 1)
                         {
@@ -176,13 +178,13 @@ namespace TXT11
                 else
                 {
                     Console.WriteLine("올바른 번호를 입력해주세요.");
-                    Console.ReadLine();
+
                 }
             }
             else
             {
                 Console.WriteLine("숫자를 입력해주세요.");
-                Console.ReadLine();
+
             }
         }
 
