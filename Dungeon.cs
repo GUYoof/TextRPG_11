@@ -76,6 +76,7 @@ namespace TXT11
                 else
                 {
                     monster.Attack = monster.Attack -= player.Defense;
+                    player.HP = player.HP -= monster.Attack;
                     Console.WriteLine($"플레이어가 {monster.Attack -= player.Defense} 데미지를 입었습니다. 현재 hp: {player.HP}");
                 }
             };
