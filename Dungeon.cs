@@ -163,9 +163,30 @@ namespace TXT11
                 else if (choice == "3")
                 {
                     Console.WriteLine("모닥불을 피우고 휴식을 취합니다.");
+
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("\n   ◆   ◆");
+                    Console.WriteLine("  ◆◆◇ ◆◆◇");
+                    Console.WriteLine(" ◆◆◆◇◇◆◆◇");
+                    Console.WriteLine(" ◆◆◆◇◇◆◆◆◇");
+                    Console.Write("◆◆◆◆◆◇◇◆◇◇");
+                    Console.ResetColor();
+                    Console.WriteLine(" ○");
+                    Console.WriteLine("   ▒   ▒   |┘┘");
+                    Console.WriteLine("   ▒   ▒   └═┐┐      ");
+                    Console.WriteLine("   ▒      ▓▓ └└   🔥 ");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.Write("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.Write("// \\\\");
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲");
+                    Console.ResetColor();
+                    Console.ReadKey();
+            
                     player.HP += 30;
-                    Console.WriteLine($"{player.HP}");
-                    Console.WriteLine("다음날 아침이 되자 몬스터가 습격해왔습니다.");
+                    Console.WriteLine($"\n{player.HP}");
+                    Console.WriteLine("\n다음날 아침이 되자 몬스터가 습격해왔습니다.");
                     battle.DungeonEnter();
                 }
 
