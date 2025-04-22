@@ -1,4 +1,6 @@
-﻿public class Player
+﻿using TXT11;
+
+public class Player
 {
     public string Name { get; set; }
     public string Job { get; set; }

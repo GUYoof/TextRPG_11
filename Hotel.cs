@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TXT11;
@@ -46,12 +47,11 @@ namespace TXT11
             }
         }
     }
-
+    
     public class Campfire
     {
-
-
-        public void Rest(Player player)
+        
+        public void Rest(Player player, Battlesystem battlesystem)
         {
             Console.Clear();
             Console.WriteLine("모닥불에서 휴식하기");
@@ -62,8 +62,12 @@ namespace TXT11
             int Choose = int.Parse(Console.ReadLine());
             if (Choose == 1)
             {
-                Console.WriteLine("휴식을 취합니다.");
+                Console.WriteLine("휴식을 취합니다. 체력 +30 회복");
                 player.HP += 30;
+                Console.WriteLine($"현재 HP: {player.HP}");
+
+                Console.WriteLine("던전으로 다시 돌아갑니다...");
+                battlesystem.DungeonEnter();
             }
             else if (Choose == 0)
             {
@@ -72,7 +76,7 @@ namespace TXT11
             else
             {
                 Console.WriteLine("잘못된 입력입니다");
-                Rest(player);
+                Rest(player, battlesystem);
             }
         }
     }

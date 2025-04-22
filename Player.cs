@@ -12,11 +12,12 @@ using TXT11;
         public string Name { get; set; }
         public string Job { get; set; }
         public int Level { get; set; } // = 1;
-        public int HP { get; set; }
+        public float HP { get; set; }
         public float Attack { get; set; }
         public int Defense { get; set; }
         public int Gold { get; set; }
         public int Exp { get; set; } // = 5;
+        public float Critical { get; set; }
         
         private static readonly int[] LevelRequirements = { 10, 35, 65, 100 }; // 레벨업에 필요한 경험치
 
@@ -49,7 +50,7 @@ using TXT11;
         public List<Item> Inventory { get; private set; } = new List<Item>();
 
         // 레벨업 보상 attack 0.5f , float으로 바꿔야함.
-        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp)
+        public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , float critical)
         {
             Name = name;
             Job = job;
@@ -59,11 +60,18 @@ using TXT11;
             Defense = defense;
             Gold = gold;
             Exp = exp;
+            Critical = critical;
+        }
+        public bool CriticalChance()
+        {
+            Random rand = new Random();
+            float roll = (float)rand.NextDouble(); // 0.0 ~ 1.0 사이의 난수
+            return roll < Critical; // 예: Critical = 0.2f -> 20% 확률
         }
 
         public float GetTotalAttack()
         {
-            int bonus = Inventory.Where(i => i.Type == ItemType.Weapon).Sum(i => i.Attack);
+            float bonus = Inventory.Where(i => i.Type == ItemType.Weapon).Sum(i => i.Attack);
             return Attack + bonus;
         }
 
