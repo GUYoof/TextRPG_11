@@ -42,7 +42,7 @@ namespace TXT11
             Console.WriteLine("\n\"자네 이름이 뭔가?\n");
             string characterName = Console.ReadLine();
 
-            Console.WriteLine($"\n\"{characterName}라 -. 환영하네.\"");
+            Console.WriteLine($"\n\"{characterName}-. 환영하네.\"");
             Console.ReadLine();
             
             string jobName = "";

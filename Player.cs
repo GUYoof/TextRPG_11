@@ -165,8 +165,8 @@ namespace TXT11
             Console.WriteLine($"| 방어력 : {defenseText}");
             Console.WriteLine($"| Gold   : {Gold}");
             Console.WriteLine("===========================");
-            Console.WriteLine("엔터를 누르면 이전 화면으로 갑니다.");
             Console.ResetColor();
+            Console.WriteLine("엔터를 누르면 이전 화면으로 갑니다.");
             Console.ReadLine();
         }
 
