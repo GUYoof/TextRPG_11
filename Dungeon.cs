@@ -63,6 +63,7 @@ namespace TXT11
 
         public void DungeonEnter()
         {
+            Console.Clear();
             Console.WriteLine($"{monsters.Count}마리의 {monsters[0].Name}이(가) 나타났습니다!");
 
             while (player.HP > 0 && monsters.Any(m => m.HP > 0))
@@ -180,6 +181,17 @@ namespace TXT11
             while (true)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("        ▲              ▲");
+                Console.WriteLine("       ■■              ■■");
+                Console.WriteLine("      ■■■  ░░░░░░░░░░  ■■■"); 
+                Console.WriteLine("     ■■■■■░░░░░░░░░░░░■■■■■");
+                Console.WriteLine("      ■■■░  ░░░░░░░░░  ░■■■");
+                Console.WriteLine("      ░░░░░░░░░ ░ ░░░░░░░░");
+                Console.WriteLine(" 🔥   ░░░░░░░░░░░░░░░░░░░░    🔥");
+                Console.WriteLine(" |     ░░░▲▼▲▼▲▼▲▼▲▼▲▼▲░░     | ");
+                Console.WriteLine("/|\\      ░░░░░░░░░░░░░░      /|\\");
+                Console.ResetColor();
                 Console.WriteLine("\n--- 던전을 선택하세요 ---");
                 for (int i = 0; i < dungeons.Count; i++)
                     Console.WriteLine($"{i + 1}. {dungeons[i].Name}");
