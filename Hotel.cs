@@ -16,7 +16,9 @@ namespace TXT11
         public void Rest(Player player)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("여관 이용 하기");
+            Console.ResetColor();
 
             Console.WriteLine("500G를 내면 여관에서 체력을 회복 할수 있습니다.");
             Console.WriteLine(); //공백 추가
@@ -37,10 +39,17 @@ namespace TXT11
                     player.Gold -= 500;
                     
                 }
+                else
+                {
+                    Console.WriteLine($"골드가 부족합니다.현재 골드 : {player.Gold}");
+                    Console.ReadKey();
+                    Console.Clear();
+                    return;
+                }
             }
             else if (Choose == 0)
             {
-                Console.WriteLine($"골드가 부족합니다.현재 골드 : {player.Gold}");
+                Console.WriteLine("마을로 돌아갑니다.");
                 Console.ReadKey();
                 Console.Clear();
                 return;
@@ -59,8 +68,10 @@ namespace TXT11
         public void Rest(Player player, DungeonProgram dungeonProgram)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("모닥불에서 휴식하기");
-
+            Console.ResetColor();
+            
             Console.WriteLine("1. 휴식하기\n 0.나가기");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 선택해주세요.\n>>");
