@@ -29,9 +29,11 @@ namespace TXT11
         public void ShowItemList(Player player)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("상점");
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{player.Gold} G\n");
+            Console.ResetColor();
 
             Console.WriteLine("[아이템 목록]");
             //            foreach (Item item in Items)
@@ -73,10 +75,12 @@ namespace TXT11
             {
                 int maxPotionCount = 5;
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("포션상점");
                 Console.WriteLine("[보유 골드]");
                 Console.WriteLine($"{player.Gold} G\n");
-
+                Console.ResetColor();
+                
                 Console.WriteLine($"\n [(최대소지갯수) : {maxPotionCount}]");
 
                 Console.WriteLine($" 포션 가격: 30G " );
@@ -160,9 +164,11 @@ namespace TXT11
         public void ProceedPurchase(Player player)
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("상점");
             Console.WriteLine("[보유 골드]");
             Console.WriteLine($"{player.Gold} G\n");
+            Console.ResetColor();
 
             for (int i = 0; i < Items.Count; i++)
             {

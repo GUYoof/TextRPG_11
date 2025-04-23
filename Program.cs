@@ -136,7 +136,9 @@ namespace TXT11
             while (true)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("마을에 도착했습니다. 여기서는 다양한 활동을 할 수 있습니다.");
+                Console.ResetColor();
                 Console.WriteLine("\n1. 상태 보기");
                 Console.WriteLine("2. 인벤토리");
                 Console.WriteLine("3. 상점");

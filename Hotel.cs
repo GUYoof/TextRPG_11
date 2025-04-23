@@ -71,7 +71,7 @@ namespace TXT11
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("모닥불에서 휴식하기");
             Console.ResetColor();
-            
+
             Console.WriteLine("1. 휴식하기\n 0.나가기");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 선택해주세요.\n>>");

@@ -149,6 +149,7 @@ namespace TXT11
             }
 
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("===========================");
             Console.WriteLine($"| 이름   : {Name}");
             Console.WriteLine($"| 레벨   : {Level}");
@@ -165,6 +166,7 @@ namespace TXT11
             Console.WriteLine($"| Gold   : {Gold}");
             Console.WriteLine("===========================");
             Console.WriteLine("엔터를 누르면 이전 화면으로 갑니다.");
+            Console.ResetColor();
             Console.ReadLine();
         }
 
@@ -173,7 +175,9 @@ namespace TXT11
             while (true)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("인벤토리");
+                Console.ResetColor();
                 Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
                 Console.WriteLine("\n[아이템 목록]");
 
@@ -229,7 +233,9 @@ namespace TXT11
             while (true)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
                 Console.WriteLine("인벤토리 - 장착 관리");
+                Console.ResetColor();
                 Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
                 Console.WriteLine("\n[아이템 목록]");
 

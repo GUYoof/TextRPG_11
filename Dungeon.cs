@@ -64,7 +64,9 @@ namespace TXT11
         public void DungeonEnter()
         {
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine($"{monsters.Count}마리의 {monsters[0].Name}이(가) 나타났습니다!");
+            Console.ResetColor();
 
             while (player.HP > 0 && monsters.Any(m => m.HP > 0))
             {
@@ -125,10 +127,13 @@ namespace TXT11
                 }
             }
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"\n전투 종료! 총 획득 보상:");
             Console.WriteLine($"🪙 골드 +{totalGoldGained}");
+
             player.GainExp(totalExpGained);
             player.Gold += totalGoldGained;
+            Console.ResetColor();
         }
             private void PlayerAttack(Monster monster)
     {
@@ -139,7 +144,9 @@ namespace TXT11
         if (player.CriticalChance())
         {
             damage *= 1.6f;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("⚡ 크리티컬 히트! ⚡");
+            Console.ResetColor();
         }
         int finalDamage = (int)MathF.Ceiling(damage);
         monster.HP -= finalDamage;
@@ -148,10 +155,14 @@ namespace TXT11
 
     private void MonsterAttack(Monster monster)
     {
+        Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine($"\n[{monster.Name}의 반격!]");
+        Console.ResetColor();
         if (player.AvoidChance())
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("플레이어가 공격을 회피했습니다!");
+            Console.ResetColor();
             return;
         }
 
@@ -162,7 +173,9 @@ namespace TXT11
         }
 
         player.HP -= damage;
+        Console.ForegroundColor = ConsoleColor.Gray;
         Console.WriteLine($"플레이어가 {damage} 데미지를 입었습니다. 현재 HP: {Math.Max(player.HP, 0)}");
+        Console.ResetColor();
     }
 }
     public class DungeonProgram
