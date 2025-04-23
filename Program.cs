@@ -39,11 +39,11 @@ namespace TXT11
             Console.ReadKey();
             Console.Clear();
             Console.WriteLine("\n\"어서오게나 이세계 청년. 여긴 66666년 전 세계라네.\"");
-            Console.Write("\n\"자네 이름이 뭔가?");
+            Console.WriteLine("\n\"자네 이름이 뭔가?\n");
             string characterName = Console.ReadLine();
 
             Console.WriteLine($"\n\"{characterName}라 -. 환영하네.\"");
-            Console.ReadKey();
+            Console.ReadLine();
             
             string jobName = "";
             int lv = 1, hp = 0, attack = 0, defense = 0, gold = 0, exp = 0, potioncount = 0;
@@ -53,11 +53,11 @@ namespace TXT11
             while (!validJob)
             {
                 Console.Clear();
-                Console.WriteLine($"\"이 세계를 모험을 하기 위해서는 직업이 필요하다네.\"");
-                Console.WriteLine($"\"자, 어떤 길을 떠날텐가?\"");
+                Console.WriteLine($"\"이 세계를 모험을 하기 위해서는 직업이 필요하지.\"");
+                Console.WriteLine($"\n\"자, 어떤 길을 떠날텐가?\"");
                 Console.WriteLine("\n1. 전사");
                 Console.WriteLine("2. 궁수");
-                Console.WriteLine("3. 도적");
+                Console.WriteLine("3. 도적\n");
                 
                 string select = Console.ReadLine();
 
@@ -101,12 +101,16 @@ namespace TXT11
                     Console.ReadLine();
                 }
 
+            }
                 Console.Clear();
                 Console.WriteLine($"\n\"{jobName}... 나쁘지 않은 선택이야.\"");
-                Console.WriteLine($"\"모험을 떠날 준비가 되었는가?\"");
+                Console.WriteLine($"\n\"모험을 떠날 준비가 되었는가?\"");
                 Console.ReadKey();
                 Console.WriteLine("\n\"그럼 행운을 빌겠네...\"");
-            }
+                Console.ReadLine();
+                Console.WriteLine("\n.");
+                Console.WriteLine("\n.");
+                Console.WriteLine("\n.");
             Player player = new Player(characterName, jobName, lv, hp, attack, defense, gold, exp, potioncount);
             Town town = new Town(player);
             town.TownMain();
