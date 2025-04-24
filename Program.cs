@@ -181,6 +181,7 @@ namespace TXT11
                     Console.WriteLine("숫자를 입력해주세요.");
                     Console.ReadLine();
                 }
+                break;
             }
         }
     }
