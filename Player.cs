@@ -27,8 +27,10 @@ namespace TXT11
         private static Random rand = new Random();
         private static readonly int[] LevelRequirements = { 10, 35, 65, 100 }; // 레벨업에 필요한 경험치
 
+        //포션사용함수
         public void UsePotion()
         {
+            //포션 없을때의 예외처리
             if (PotionCount <= 0)
             {
                 Console.WriteLine("포션이 없습니다!");
@@ -72,11 +74,9 @@ namespace TXT11
 
 
         }
-
+        //인벤토리 리스트로 구현
         public List<Item> Inventory { get; private set; } = new List<Item>();
-
-        // 레벨업 보상 attack 0.5f , float으로 바꿔야함.
-
+        //플레이어 정의
         public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , int potioncount)
         {
             Name = name;
@@ -88,6 +88,7 @@ namespace TXT11
             Gold = gold;
             Exp = exp;
             PotionCount = potioncount;
+            //플레이어 직업에 따라 최대 체력과 치명 회피율 조정
             switch (job.ToLower())
             {
                 case "전사":
@@ -110,6 +111,7 @@ namespace TXT11
                     break;
             }
         }
+        //플레이어 능력치 적용에 필요한 함수
         public bool CriticalChance()
         {
             float roll = (float)rand.NextDouble();
@@ -133,7 +135,7 @@ namespace TXT11
             int bonus = Inventory.Where(i => i.Type == ItemType.Armor).Sum(i => i.Defense);
             return Defense + bonus;
         }
-
+        //플레이어 스테이터스 함수
         public void ShowStatus()
         {
             float bonusAttack = 0;
@@ -169,7 +171,7 @@ namespace TXT11
             Console.WriteLine("엔터를 누르면 이전 화면으로 갑니다.");
             Console.ReadLine();
         }
-
+        //플레이어 인벤토리 함수
         public void ShowInventory()
         {
             while (true)
@@ -227,7 +229,7 @@ namespace TXT11
                 }
             }
         }
-
+        //장비 아이템 장착 구현
         public void ProcessedEquipment()
         {
             while (true)

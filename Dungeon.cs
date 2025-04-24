@@ -9,10 +9,7 @@ using TXT11;
 
 namespace TXT11
 {
-
-    public delegate void BattleAction();
-
-
+    //던전 구현
     public class Dungeon
     {
         public string Name;
@@ -24,7 +21,7 @@ namespace TXT11
             Monster = monster;
         }
     }
-
+    //몬스터 구현
     public class Monster
     {
         public string Name;
@@ -33,7 +30,7 @@ namespace TXT11
         public int ExpReward;
         public int GoldReward;
 
-        
+
 
 
         public Monster(string name, int hp, float atk, int exp, int gold)
@@ -58,16 +55,14 @@ namespace TXT11
             this.player = player;
             this.monsters = monsters;
         }
-
-        
-
+        //몬스터 출현 구현
         public void DungeonEnter()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine($"{monsters.Count}마리의 {monsters[0].Name}이(가) 나타났습니다!");
             Console.ResetColor();
-
+            //몬스터의 현재 상태 창
             while (player.HP > 0 && monsters.Any(m => m.HP > 0))
             {
                 Console.WriteLine("\n현재 몬스터 상태:");
@@ -76,7 +71,7 @@ namespace TXT11
                     string status = monsters[i].HP > 0 ? $"{monsters[i].Name} - HP: {monsters[i].HP}" : $"{monsters[i].Name} (dead)";
                     Console.WriteLine($"{i + 1}. {status}");
                 }
-
+                //행동 선택
                 Console.WriteLine("\n1. 공격");
                 Console.WriteLine("2. 포션 사용");
                 Console.Write("행동 선택: ");
@@ -135,51 +130,55 @@ namespace TXT11
             player.Gold += totalGoldGained;
             Console.ResetColor();
         }
-            private void PlayerAttack(Monster monster)
-    {
-        Console.WriteLine("\n[플레이어의 공격]");
-        Random random = new Random();
-        float randomValue = 0.9f + ((float)random.NextDouble() * 0.2f);
-        float damage = player.Attack * randomValue;
-        if (player.CriticalChance())
+        private void PlayerAttack(Monster monster)
         {
-            damage *= 1.6f;
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("⚡ 크리티컬 히트! ⚡");
+            //최소 최대 데미지 구현
+            Console.WriteLine("\n[플레이어의 공격]");
+            Random random = new Random();
+            float randomValue = 0.9f + ((float)random.NextDouble() * 0.2f);
+            float damage = player.Attack * randomValue;
+            //크리티컬 구현
+            if (player.CriticalChance())
+            {
+                damage *= 1.6f;
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("⚡ 크리티컬 히트! ⚡");
+                Console.ResetColor();
+            }
+            int finalDamage = (int)MathF.Ceiling(damage);
+            monster.HP -= finalDamage;
+            Console.WriteLine($"{monster.Name}에게 {finalDamage} 데미지를 입혔습니다. 남은 HP: {Math.Max(monster.HP, 0)}");
+        }
+
+        private void MonsterAttack(Monster monster)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"\n[{monster.Name}의 반격!]");
+            Console.ResetColor();
+            //플레이어 회피율 구현(몬스터의 명중률 구현)
+            if (player.AvoidChance())
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("플레이어가 공격을 회피했습니다!");
+                Console.ResetColor();
+                return;
+            }
+
+            float damage = monster.Attack - player.Defense;
+            if (damage <= 0)
+            {
+                damage = 0;
+            }
+
+            player.HP -= damage;
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine($"플레이어가 {damage} 데미지를 입었습니다. 현재 HP: {Math.Max(player.HP, 0)}");
             Console.ResetColor();
         }
-        int finalDamage = (int)MathF.Ceiling(damage);
-        monster.HP -= finalDamage;
-        Console.WriteLine($"{monster.Name}에게 {finalDamage} 데미지를 입혔습니다. 남은 HP: {Math.Max(monster.HP, 0)}");
     }
-
-    private void MonsterAttack(Monster monster)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"\n[{monster.Name}의 반격!]");
-        Console.ResetColor();
-        if (player.AvoidChance())
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("플레이어가 공격을 회피했습니다!");
-            Console.ResetColor();
-            return;
-        }
-
-        float damage = monster.Attack - player.Defense;
-        if (damage <= 0)
-        {
-            damage = 0;
-        }
-
-        player.HP -= damage;
-        Console.ForegroundColor = ConsoleColor.Gray;
-        Console.WriteLine($"플레이어가 {damage} 데미지를 입었습니다. 현재 HP: {Math.Max(player.HP, 0)}");
-        Console.ResetColor();
-    }
-}
     public class DungeonProgram
     {
+        //던전 메인함수
         public void DungeonMain(Player player)
         {
             Random random = new Random();
@@ -197,7 +196,7 @@ namespace TXT11
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("        ▲              ▲");
                 Console.WriteLine("       ■■              ■■");
-                Console.WriteLine("      ■■■  ░░░░░░░░░░  ■■■"); 
+                Console.WriteLine("      ■■■  ░░░░░░░░░░  ■■■");
                 Console.WriteLine("     ■■■■■░░░░░░░░░░░░■■■■■");
                 Console.WriteLine("      ■■■░  ░░░░░░░░░  ░■■■");
                 Console.WriteLine("      ░░░░░░░░░ ░ ░░░░░░░░");
@@ -217,18 +216,18 @@ namespace TXT11
                 }
 
                 var selectedDungeon = dungeons[dungeonChoice - 1];
-                int monsterCount = random.Next(1, 5); 
+                int monsterCount = random.Next(1, 5);
 
                 List<Monster> monsterList = new List<Monster>();
                 for (int i = 0; i < monsterCount; i++)
                 {
-                    int variation = random.Next(0, 6); 
+                    int variation = random.Next(0, 6);
                     var m = selectedDungeon.Monster;
 
                     monsterList.Add(new Monster(
                         m.Name,
-                        m.HP + 5 * variation,           
-                        m.Attack + variation,             
+                        m.HP + 5 * variation,
+                        m.Attack + variation,
                         m.ExpReward + variation,
                         m.GoldReward + variation
                     ));

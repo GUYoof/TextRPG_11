@@ -11,8 +11,7 @@ namespace TXT11
 {
     public class Hotel
     {
-
-
+        //마을 휴식 구현
         public void Rest(Player player)
         {
             Console.Clear();
@@ -39,6 +38,7 @@ namespace TXT11
                     player.Gold -= 500;
                     
                 }
+                //돈이 없을때.
                 else
                 {
                     Console.WriteLine($"골드가 부족합니다.현재 골드 : {player.Gold}");
@@ -61,7 +61,7 @@ namespace TXT11
             }
         }
     }
-    
+    //던전에서 휴식을 선택하면 이곳으로 옴.
     public class Campfire
     {
         
