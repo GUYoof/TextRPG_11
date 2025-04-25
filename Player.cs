@@ -25,6 +25,7 @@ namespace TXT11
         public float Avoid { get; set; }
         
         private static Random rand = new Random();
+
         private static readonly int[] LevelRequirements = { 10, 35, 65, 100 }; // 레벨업에 필요한 경험치
 
         //포션사용함수
@@ -203,8 +204,8 @@ namespace TXT11
                         Console.WriteLine($"- {equippedMark}{item.Name} {statText} {item.Description} ({item.Type})");
                     }
                 }
-
-                Console.WriteLine("\n1. 장착하기");
+                Console.WriteLine($"\n포션 개수 : {PotionCount}");
+                Console.WriteLine("\n\n1. 장착하기");
                 Console.WriteLine("0. 나가기");
                 Console.WriteLine("\n원하는 행동을 입력해주세요.");
                 string select = Console.ReadLine();

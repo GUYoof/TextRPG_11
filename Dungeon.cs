@@ -207,12 +207,18 @@ namespace TXT11
                 Console.WriteLine("\n--- 던전을 선택하세요 ---");
                 for (int i = 0; i < dungeons.Count; i++)
                     Console.WriteLine($"{i + 1}. {dungeons[i].Name}");
+                Console.WriteLine("0. 마을로 돌아가기");
                 Console.Write("선택: ");
                 string input = Console.ReadLine();
-                if (!int.TryParse(input, out int dungeonChoice) || dungeonChoice < 1 || dungeonChoice > dungeons.Count)
+                if (!int.TryParse(input, out int dungeonChoice)|| dungeonChoice > dungeons.Count)
                 {
                     Console.WriteLine("잘못된 선택");
                     continue;
+                }
+                else if (dungeonChoice == 0)
+                {
+                    Town town = new Town(player);
+                    town.TownMain();
                 }
 
                 var selectedDungeon = dungeons[dungeonChoice - 1];
