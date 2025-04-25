@@ -9,11 +9,14 @@ using TXT11;
 
 namespace TXT11
 {
+    
     public class Hotel
     {
+
         //마을 휴식 구현
         public void Rest(Player player)
         {
+            Town town = new Town(player);
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("여관 이용 하기");
@@ -36,7 +39,7 @@ namespace TXT11
 
                     player.HP = player.MaxHP;
                     player.Gold -= 500;
-                    
+                    town.TownMain();
                 }
                 //돈이 없을때.
                 else
