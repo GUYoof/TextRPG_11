@@ -12,7 +12,7 @@ namespace TXT11
 {
     public static class SaveManager
     {
-        private static string path = "save.txt";
+        private static string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "save.txt");
         public static void ShowOptionsMenu(Player player)
         {
             while (true)
@@ -88,14 +88,19 @@ namespace TXT11
                 // 마지막 쉼표 제거 후 저장
                 writer.WriteLine(inventory);
             }
-            Console.WriteLine("저장 되었습니다.");
+            Console.WriteLine("저장 되었습니다.\n엔터를 눌러주세요.");
+            Console.ReadLine();
         }
 
         public static Player Load()
         {
+            Console.WriteLine($"불러오기 시도 중... 경로: {path}");
             if (!File.Exists(path)) // 파일이 존재하지 않으면 null 반환
             {
-                Console.WriteLine("저장된 파일이 없습니다.");
+                Console.WriteLine("현재 경로에서 파일을 찾을 수 없습니다:");
+                Console.WriteLine(path); // 경로 출력해서 디버깅 도움
+                Console.WriteLine("엔터를 눌러 계속하세요.");
+                Console.ReadLine();
                 return null;
             }
 
@@ -172,7 +177,8 @@ namespace TXT11
                 }
             }
 
-            Console.WriteLine("불러오기 완료 되었습니다.");
+            Console.WriteLine("불러오기 완료 되었습니다.\n엔터를 눌러주세요.");
+            Console.ReadLine();
             return player;
         }
         public static void Reset()
