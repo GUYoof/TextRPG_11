@@ -11,7 +11,7 @@ using System.IO;
 namespace TXT11
 {
     public static class SaveManager
-    {
+    {   //세이브파일을 바탕화면에 저장
         private static string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "save.txt");
         public static void ShowOptionsMenu(Player player)
         {
@@ -124,8 +124,9 @@ namespace TXT11
                     float attack = float.Parse(parts[5]);
                     int defense = int.Parse(parts[6]);
                     bool isSold = bool.Parse(parts[7]);
-
-                    Item item = new Item(name, description, price, type, attack, defense) // 새로운 Item 객체를 생성하고, 장착 여부와 판매 여부도 설정
+                    
+                    // 새로운 Item 객체를 생성하고, 장착 여부와 판매 여부도 설정
+                    Item item = new Item(name, description, price, type, attack, defense) 
                     {
                         IsEquipped = isEquipped,
                         IsSold = isSold
