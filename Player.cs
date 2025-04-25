@@ -75,7 +75,7 @@ namespace TXT11
 
         }
         //인벤토리 리스트로 구현
-        public List<Item> Inventory { get; private set; } = new List<Item>();
+        public List<Item> Inventory { get; set; } = new List<Item>();
         //플레이어 정의
         public Player(string name, string job, int level, int hp, float attack, int defense, int gold, int exp , int potioncount)
         {
@@ -170,6 +170,7 @@ namespace TXT11
             Console.ResetColor();
             Console.WriteLine("엔터를 누르면 이전 화면으로 갑니다.");
             Console.ReadLine();
+
         }
         //플레이어 인벤토리 함수
         public void ShowInventory()
@@ -311,6 +312,33 @@ namespace TXT11
 
             Console.WriteLine("\n엔터를 누르면 돌아갑니다.");
             Console.ReadLine();
+        }
+
+        public void CopyFrom(Player other)
+        {
+            this.Name = other.Name;
+            this.Job = other.Job;
+            this.Level = other.Level;
+            this.HP = other.HP;
+            this.MaxHP = other.MaxHP;
+            this.Attack = other.Attack;
+            this.Defense = other.Defense;
+            this.Gold = other.Gold;
+            this.Exp = other.Exp;
+            this.PotionCount = other.PotionCount;
+            this.Critical = other.Critical;
+            this.Avoid = other.Avoid;
+
+            this.Inventory = new List<Item>();
+            foreach (var item in other.Inventory)
+            {
+                // Item 클래스에 복사 생성자가 없으므로 새 객체로 생성
+                this.Inventory.Add(new Item(item.Name, item.Description, item.Price, item.Type, item.Attack, item.Defense)
+                {
+                    IsSold = item.IsSold,
+                    IsEquipped = item.IsEquipped
+                });
+            }
         }
     }
 }

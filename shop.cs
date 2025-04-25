@@ -187,7 +187,7 @@ namespace TXT11
                 Console.WriteLine($" [{i + 1}].  {item.Name} : {statText} {item.Description} ({priceText})");
             }
 
-            Console.WriteLine("\n구매할 아이템 번호를 선택하세요.([0]. 나가기)");
+            Console.WriteLine("\n구매할 아이템 번호를 선택하세요.\n([0]. 나가기)");
             Console.Write("선택 :  ");
             string select = Console.ReadLine();
 

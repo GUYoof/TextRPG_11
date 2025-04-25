@@ -17,15 +17,15 @@ namespace TXT11
         public int Defense { get; set; }
 
         public bool IsSold { get; set; } = false;
-        public bool IsEquipped = false;
+        public bool IsEquipped { get; set; } = false;
 
-        public Item(string name, string description, int price, ItemType type, float attact = 0, int defense = 0)
+        public Item(string name, string description, int price, ItemType type, float attack = 0, int defense = 0)
         {
             Name = name;
             Price = price;
             Description = description;
             Type = type;
-            Attack = attact;
+            Attack = attack;
             Defense = defense;
         }
     }

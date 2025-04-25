@@ -144,6 +144,7 @@ namespace TXT11
                 Console.WriteLine("3. 상점");
                 Console.WriteLine("4. 던전 입장");
                 Console.WriteLine("5. 휴식");
+                Console.WriteLine("6. 옵션");
                 Console.WriteLine("0. 게임 종료");
                 Console.WriteLine("\n원하시는 행동을 입력해주세요.");
                 Console.Write(">> ");
@@ -166,6 +167,9 @@ namespace TXT11
                             break;
                         case 5:
                             rest.Rest(player);
+                            break;
+                        case 6:
+                            SaveManager.ShowOptionsMenu(player);
                             break;
                         case 0:
                             Console.WriteLine("게임을 종료합니다.");
