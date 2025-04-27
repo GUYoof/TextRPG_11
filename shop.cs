@@ -26,48 +26,6 @@ namespace TXT11
                 };
         }
 
-        public void ShowItemList(Player player)
-        {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("상점");
-            Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"{player.Gold} G\n");
-            Console.ResetColor();
-
-            Console.WriteLine("[아이템 목록]");
-            //            foreach (Item item in Items)
-            //{
-            //    string priceText = item.IsSold ? "판매 완료" : $"{item.Price} G";
-
-            //    string statText = "";
-            //    if (item.Type == ItemType.Weapon && item.Attack > 0)
-            //    {
-            //        statText = $"공격력 +{item.Attack}";
-            //    }
-            //    else if (item.Type == ItemType.Armor && item.Defense > 0)
-            //    {
-            //        statText = $"방어력 +{item.Defense}";
-            //    }
-            //    Console.WriteLine($"- {item.Name} : {statText} {item.Description} ({priceText})");
-            //}
-
-            for (int i = 0; i < Items.Count; i++)
-            {
-                string priceText = Items[i].IsSold ? "판매 완료" : $"{Items[i].Price} G";
-                string statText = "";
-                if (Items[i].Type == ItemType.Weapon && Items[i].Attack > 0)
-                    {
-                        statText = $"공격력 +{Items[i].Attack}";
-                    }
-                else if (Items[i].Type == ItemType.Armor && Items[i].Defense > 0)
-                    {
-                        statText = $"방어력 +{Items[i].Defense}";
-                    }
-
-                Console.WriteLine($"- {Items[i].Name} : {statText} {Items[i].Description} ({priceText})");
-            }
-        }
 
         public void PotionShopEnter(Player player)
         {
@@ -75,6 +33,7 @@ namespace TXT11
             {
                 int maxPotionCount = 5;
                 Console.Clear();
+
                 Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("포션상점");
                 Console.WriteLine("[보유 골드]");
@@ -82,16 +41,14 @@ namespace TXT11
                 Console.ResetColor();
                 
                 Console.WriteLine($"\n [(최대소지갯수) : {maxPotionCount}]");
-
                 Console.WriteLine($" 포션 가격: 30G " );
-                Console.Write("몇 개 구매하시겠습니까?");
+                Console.Write("몇 개 구매하시겠습니까? ");
                 Console.WriteLine("[0]. 상점으로 돌아가기");
                 do
                 {
                     if (int.TryParse(Console.ReadLine(), out int amount) && amount >= 0 )
                     {
                         int cost = amount * 30;
-
 
                         if (amount == 0)
                         {
@@ -114,107 +71,49 @@ namespace TXT11
                 } while (true);
             }
         }
-            
 
-        public void ShopEnter(Player player)
+        public void ProceedSell(Player player)
         {
-            while (true)
+            do
             {
-                ShowItemList(player);
-                Console.WriteLine("\n[1]. 아이템 구매");
-                Console.WriteLine("[2]. 포션 구매");
-                Console.WriteLine("[0]. 나가기");
-                Console.WriteLine("\n원하는 행동을 입력하세요.");
-                Console.Write("\n선택: ");
+                player.InventoryItemList();
+                Console.WriteLine("\n판매할 아이템 번호를 선택하세요. ([0]. 나가기)");
+                Console.Write("선택 :  ");
 
-                do
+                if (int.TryParse(Console.ReadLine(), out int output))
                 {
-                    string select = Console.ReadLine();
-
-                    if (int.TryParse(select, out int output) && output >= 0)
+                    if (output == 0)
                     {
-                        if (output == 0)
-                        {
-                            Town town = new Town(player);
-                            town.TownMain();
-                        }
-                        else if (output == 1)
-                        {
-                            ProceedPurchase(player);
-                            break;
-                        }
-                        else if (output == 2)
-                        {
-                            PotionShopEnter(player);
-                        }
-                        else
-                        {
-                            Console.WriteLine("올바른 번호를 입력해주세요.");
-                            break;
-                        }
-                        Console.WriteLine("숫자를 입력해주세요.");
-
+                        ShopEnter(player);
                     }
-                    Console.WriteLine("올바른 번호를 입력해주세요.");
-                } while (true);
+                    else if (output >= 1 && output <= player.Inventory.Count)
+                    {
+                        Item selectedItem = player.Inventory[output - 1];
+                        int sellPrice = (int)(selectedItem.Price * 0.8);
 
-            }
-        }
+                        player.Gold += sellPrice;
+                        selectedItem.IsSold = false;
+                        player.Inventory.Remove(selectedItem);
 
-        public void ProceedPurchase(Player player)
-        {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("상점");
-            Console.WriteLine("[보유 골드]");
-            Console.WriteLine($"{player.Gold} G\n");
-            Console.ResetColor();
-
-            for (int i = 0; i < Items.Count; i++)
-            {
-                Item item = Items[i];
-                string priceText = item.IsSold ? "판매 완료" : $"{item.Price} G";
-
-                string statText = "";
-                if (item.Type == ItemType.Weapon && item.Attack > 0)
-                {
-                    statText = $"공격력 +{item.Attack}";
-                }
-                else if (item.Type == ItemType.Armor && item.Defense > 0)
-                {
-                    statText = $"방어력 +{item.Defense}";
-                }
-                Console.WriteLine($" [{i + 1}].  {item.Name} : {statText} {item.Description} ({priceText})");
-            }
-
-            Console.WriteLine("\n구매할 아이템 번호를 선택하세요.\n([0]. 나가기)");
-            Console.Write("선택 :  ");
-            string select = Console.ReadLine();
-
-            if (int.TryParse(select, out int index))
-            {
-                if (index == 0)
-                {
-                    ShopEnter(player);
-                }
-                else if (index >= 1 && index <= Items.Count)
-                {
-                    HandlePurchase(player, index);
+                        Console.WriteLine($"'{selectedItem.Name}'을(를) {sellPrice}G에 판매했습니다!");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.WriteLine("올바른 번호를 입력해주세요.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("올바른 번호를 입력해주세요.");
+                    Console.WriteLine("숫자를 입력해주세요.");
                 }
-            }
-            else
-            {
-                Console.WriteLine("숫자를 입력해주세요.");
-            }
+            } while (true);
         }
 
-        public void HandlePurchase(Player player, int index)
+
+        public void HandlePurchase(Player player, int output)
         {
-            Item selectedItem = Items[index - 1];
+            Item selectedItem = Items[output - 1];
 
             if (player.Inventory.Any(i => i.Name == selectedItem.Name))
             {
@@ -222,28 +121,117 @@ namespace TXT11
                 Console.ReadKey();
                 ProceedPurchase(player);
             }
-
-
             else if (player.Gold >= selectedItem.Price)
             {
                 player.Gold -= selectedItem.Price;
                 selectedItem.IsSold = true;
                 player.Inventory.Add(selectedItem);
 
-
                 Console.WriteLine($"'{selectedItem.Name}'을(를) 구매했습니다!");
-                Console.ReadKey();
                 ProceedPurchase(player);
             }
             else
             {
-                Console.WriteLine("\n");
                 Console.WriteLine("Gold가 부족합니다.");
-                Console.WriteLine("\n엔터를 누르면 돌아갑니다.");
-                Console.ReadLine();
                 ProceedPurchase(player);
             }
-            
+
+        }
+
+
+        public void ProceedPurchase(Player player)
+        {
+            Console.WriteLine("\n구매할 아이템 번호를 선택하세요. ([0]. 나가기)");
+            Console.Write("선택 :  ");
+
+            do
+            {
+                if (int.TryParse(Console.ReadLine(), out int output) && output >= 0 && output <= Items.Count)
+                {
+                    if (output == 0)
+                    {
+                        ShopEnter(player);
+                    }
+                    else
+                    {
+                        HandlePurchase(player, output);
+                        break;
+                    }
+                    
+                }
+                else Console.WriteLine("올바른 값을 입력해주세요");
+            } while (true);
+        }
+
+
+        public void ShowItemList(Player player)
+        {
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("상점");
+            Console.WriteLine("[보유 골드]");
+            Console.WriteLine($"{player.Gold} G\n");
+            Console.ResetColor();
+            Console.WriteLine("[아이템 목록]");
+
+            for (int i = 0; i < Items.Count; i++)
+            {
+                string priceText = Items[i].IsSold ? "판매 완료" : $"{Items[i].Price} G";
+                string statText = "";
+                if (Items[i].Type == ItemType.Weapon && Items[i].Attack > 0)
+                {
+                    statText = $"공격력 +{Items[i].Attack}";
+                }
+                else if (Items[i].Type == ItemType.Armor && Items[i].Defense > 0)
+                {
+                    statText = $"방어력 +{Items[i].Defense}";
+                }
+
+                Console.WriteLine($"- {i+1}. {Items[i].Name} : {statText} {Items[i].Description} ({priceText})");
+            }
+        }
+
+
+        public void ShopEnter(Player player)
+        {
+            while (true)
+            {
+                ShowItemList(player);
+                Console.WriteLine("\n[1]. 아이템 구매");
+                Console.WriteLine("[2]. 아이템 판매");
+                Console.WriteLine("[3]. 포션 구매");
+                Console.WriteLine("[0]. 나가기");
+                Console.WriteLine("\n원하는 행동을 입력하세요.");
+                Console.Write("\n선택: ");
+
+                do
+                {
+                    if (int.TryParse(Console.ReadLine(), out int output) && output >= 0)
+                    {
+                        switch (output)
+                        {
+                            case 0:
+                                Town town = new Town(player);
+                                town.TownMain();
+                                break;
+                            case 1:
+                                ShowItemList(player);
+                                ProceedPurchase(player);
+                                break;
+                            case 2:
+                                ProceedSell(player);
+                                break;
+                            case 3:
+                                PotionShopEnter(player);
+                                break;
+                            default:
+                                Console.WriteLine("올바른 번호를 입력해주세요.");
+                                break;
+                        }
+                    }
+                } while (true);
+            }
         }
     }
 }
