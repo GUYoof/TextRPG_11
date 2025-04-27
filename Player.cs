@@ -173,37 +173,44 @@ namespace TXT11
             Console.ReadLine();
 
         }
+
+        public void InventoryItemList()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine("인벤토리");
+            Console.ResetColor();
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
+            Console.WriteLine("\n[아이템 목록]");
+
+            if (Inventory.Count == 0)
+            {
+                Console.WriteLine("보유 중인 아이템이 없습니다.");
+            }
+            else
+            {
+                for (int i = 0; i < Inventory.Count; i++)
+                {
+                    var item = Inventory[i];
+                    string equippedMark = item.IsEquipped ? "[E] " : "";
+
+                    string statText = "";
+                    if (item.Type == ItemType.Weapon && item.Attack > 0)
+                        statText = $"공격력 +{item.Attack}";
+                    else if (item.Type == ItemType.Armor && item.Defense > 0)
+                        statText = $"방어력 +{item.Defense}";
+
+                    Console.WriteLine($"{i + 1}. {equippedMark}{item.Name} {statText} {item.Description} ({item.Type})");
+                }
+            }
+        }
         //플레이어 인벤토리 함수
         public void ShowInventory()
         {
             while (true)
             {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("인벤토리");
-                Console.ResetColor();
-                Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
-                Console.WriteLine("\n[아이템 목록]");
+                InventoryItemList();
 
-                if (Inventory.Count == 0)
-                {
-                    Console.WriteLine("보유 중인 아이템이 없습니다.");
-                }
-                else
-                {
-                    foreach (var item in Inventory)
-                    {
-                        string equippedMark = item.IsEquipped ? "[E] " : "";
-                        string statText = "";
-
-                        if (item.Type == ItemType.Weapon && item.Attack > 0)
-                            statText = $"공격력 +{item.Attack}";
-                        else if (item.Type == ItemType.Armor && item.Defense > 0)
-                            statText = $"방어력 +{item.Defense}";
-
-                        Console.WriteLine($"- {equippedMark}{item.Name} {statText} {item.Description} ({item.Type})");
-                    }
-                }
                 Console.WriteLine($"\n포션 개수 : {PotionCount}");
                 Console.WriteLine("\n\n1. 장착하기");
                 Console.WriteLine("0. 나가기");
