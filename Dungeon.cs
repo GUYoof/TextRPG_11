@@ -117,6 +117,7 @@ namespace TXT11
                     if (player.HP <= 0)
                     {
                         Console.WriteLine("플레이어가 쓰러졌습니다...");
+                        Console.ReadKey();
                         return;
                     }
                 }
